@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" class="auth-page">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign in to Skill to Startup and pick up where you left off with Mira.">
+  <title>Sign in — Skill to Startup</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="alternate icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="alternate icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+</head>
+
+<body class="grain auth-page">
+
+  <div class="page-loader" id="page-loader" aria-label="Loading Skill to Startup" role="status">
+    <div class="loader-inner">
+      <div class="loader-mark" aria-hidden="true"><span><svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor"
+              d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+          </svg></span></div>
+      <div class="loader-name">skill to startup</div>
+      <div class="loader-line"><span></span></div>
+    </div>
+  </div>
+
+  <main class="auth-shell">
+    <aside class="auth-aside">
+      <div class="auth-aside-top">
+        <a class="brand" href="index.html" aria-label="Skill to Startup home">
+          <span class="brand-mark"><span><svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor"
+                  d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+              </svg></span></span><span>skill to startup</span>
+        </a>
+      </div>
+
+      <div class="auth-pitch">
+        <span class="eyebrow mono">Welcome back</span>
+        <h1 class="display">Mira remembers where you left the thread.</h1>
+        <p>Sign back in to pick up your conversation, check on the small bet you're testing, or message the mentor
+          you matched with.</p>
+      </div>
+
+      <div class="auth-quote">
+        <p>“I stopped trying to invent a business and started listening for the one people were already asking me
+          for.”</p>
+        <div class="person">
+          <div class="person-avatar">AN</div>
+          <div class="person-info"><strong>Amara, systems designer</strong><span>Skill to Startup member</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="auth-main">
+      <div class="auth-panel">
+        <div class="auth-panel-head">
+          <span class="eyebrow mono">Sign in</span>
+          <h2 class="display">Good to see you again.</h2>
+          <p>New here? <a href="signup.html">Create an account</a></p>
+        </div>
+
+        <form id="signin-form" novalidate>
+          <div class="field-group">
+            <div class="field">
+              <label for="signin-email">Email</label>
+              <div class="field-input-wrap">
+                <input type="email" id="signin-email" name="email" placeholder="you@example.com" data-validate="email"
+                  autocomplete="email" required>
+              </div>
+              <span class="field-error">Enter a valid email address.</span>
+            </div>
+
+            <div class="field">
+              <label for="signin-password">Password</label>
+              <div class="field-input-wrap">
+                <input type="password" id="signin-password" name="password" placeholder="Your password"
+                  data-validate="required" autocomplete="current-password" required>
+                <button type="button" class="password-toggle" data-target="signin-password">Show</button>
+              </div>
+              <span class="field-error">Enter your password.</span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label class="remember"><input type="checkbox" name="remember">Keep me signed in</label>
+            <a class="forgot-link" href="#">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="button button-primary auth-submit">Sign in <span
+              aria-hidden="true">→</span></button>
+          <p class="auth-status" role="status"></p>
+        </form>
+
+        <div class="auth-divider">or continue with</div>
+        <div class="auth-social">
+          <button type="button" class="auth-social-btn">Continue with Google</button>
+          <button type="button" class="auth-social-btn">Continue with Apple</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+    content="Skill to Startup helps you turn the thing you're good at into a business someone actually wants.">
+
+  <title>Skill to Startup</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="alternate icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="alternate icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+</head>
+
+<body>
+
+  <div class="page-loader" id="page-loader" aria-label="Loading Skill to Startup" role="status">
+    <div class="loader-inner">
+      <div class="loader-mark" aria-hidden="true">
+        <span>
+          <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor"
+              d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+          </svg>
+        </span>
+      </div>
+      <div class="loader-name">skill to startup</div>
+      <div class="loader-line"><span></span></div>
+    </div>
+  </div>
+
+  <main class="site-shell grain" id="top">
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <section class="hero">
+      <div class="container">
+        <nav class="nav" aria-label="Main navigation">
+          <a class="brand" href="index.html" aria-label="Skill to Startup home">
+            <span class="brand-mark">
+              <span>
+                <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor"
+                    d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+                </svg>
+              </span>
+            </span>
+            <span>skill to startup</span>
+          </a>
+
+          <div class="nav-links" id="nav-links">
+            <button class="nav-link" data-scroll="how-it-works">How it works</button>
+            <button class="nav-link" data-scroll="outcomes">Real beginnings</button>
+            <button class="nav-link" data-scroll="mentors">Meet mentors</button>
+            <button class="nav-link" data-scroll="belief">Our approach</button>
+          </div>
+
+          <div class="nav-actions">
+
+            <!-- Notifications -->
+            <div class="notification-wrap" id="notification-wrap">
+              <button class="notification-button" type="button" id="notification-button" aria-label="Notifications"
+                aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+
+                <span class="notification-badge" id="notification-badge" aria-hidden="true"></span>
+              </button>
+
+              <div class="notification-panel" id="notification-panel" aria-hidden="true">
+                <div class="notification-panel-head">
+                  <strong>Notifications</strong>
+                  <span id="notification-count-label">0 unread</span>
+                </div>
+
+                <div class="notification-list" id="notification-list">
+                  <div class="notification-empty">
+                    No notifications yet.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <a class="button button-quiet dashboard-link" href="#" data-role-dashboard hidden>
+              Dashboard
+            </a>
+
+            <a class="button button-quiet account-link" href="profile.html">
+              <span class="avatar-dot" id="nav-avatar">--</span>My profile
+            </a>
+
+            <a class="button button-quiet" href="signin.html" id="nav-signin">
+              Sign in
+            </a>
+
+            <a class="button button-primary" href="signup.html" id="nav-getstarted">
+              Get started
+            </a>
+
+            <a class="button button-quiet" href="index.html" id="nav-signout" data-sign-out hidden>
+              Sign out
+            </a>
+
+            <button class="button button-quiet mobile-menu" id="mobile-menu" aria-expanded="false">
+              Menu
+            </button>
+
+          </div>
+        </nav>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="hero-kicker eyebrow">
+              <span class="kicker-dot"></span>A kinder place to begin
+            </div>
+
+            <h1 class="hero-title display">
+              Your skill is <em>already</em> a start.
+            </h1>
+
+            <p class="hero-lede">
+              Skill to Startup helps you turn the thing you’re good at into a business someone actually wants — one
+              clear conversation at a time.
+            </p>
+
+            <div class="hero-buttons">
+              <button class="button button-primary" data-focus-coach>
+                Start a conversation <span aria-hidden="true">→</span>
+              </button>
+
+              <button class="button button-quiet" data-scroll="how-it-works">
+                See how it works <span aria-hidden="true">↓</span>
+              </button>
+            </div>
+
+            <div class="hero-note">
+              <span>✓</span>No pitch deck. No jargon. Just your next useful step.
+            </div>
+          </div>
+
+          <div class="coach-wrap" id="coach" data-tilt>
+            <div class="coach-card">
+              <div class="coach-top">
+                <div class="coach-persona">
+                  <div class="coach-avatar">
+                    <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor"
+                        d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+                    </svg>
+                  </div>
+
+                  <div>
+                    <div class="coach-name">Mira, your startup coach</div>
+                    <div class="coach-status">
+                      <span class="status-dot"></span>online · practical mode
+                    </div>
+                  </div>
+                </div>
+
+                <span class="coach-top-note">01 / BEGIN HERE</span>
+              </div>
+
+              <div class="coach-body" id="chat-messages">
+                <div class="message-row">
+                  <div class="message-avatar">
+                    <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor"
+                        d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+                    </svg>
+                  </div>
+
+                  <div class="message">
+                    Hey, I’m Mira. You already know something useful. Let’s find the smallest business hiding inside
+                    it.
+                    <span class="message-meta">MIRA · JUST NOW</span>
+                  </div>
+                </div>
+
+                <div class="message-row">
+                  <div class="message-avatar">
+                    <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor"
+                        d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+                    </svg>
+                  </div>
+
+                  <div class="message">
+                    What is a skill people come to you for — even when you’re not trying to sell it?
+                    <span class="message-meta">MIRA · JUST NOW</span>
+                  </div>
+                </div>
+
+                <div class="coach-suggestions" id="suggestions">
+                  <button class="prompt-chip">I have a skill, but no idea</button>
+                  <button class="prompt-chip">Who would pay for what I know?</button>
+                  <button class="prompt-chip">How do I test this this week?</button>
+                </div>
+              </div>
+
+              <form class="coach-input-wrap" id="chat-form">
+                <textarea class="chat-input" id="chat-input" rows="1" placeholder="Tell Mira what you know..."
+                  aria-label="Message your startup coach"></textarea>
+
+                <button class="send-button" type="submit" aria-label="Send message">
+                  ➤
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="logo-strip">
+      <div class="container logo-strip-inner">
+        <span class="logo-lede mono">MADE FOR THE<br>CAPABLE &amp; CURIOUS</span>
+
+        <div class="logo-marquee">
+          <div class="logo-list">
+            <span>fieldnotes</span>
+            <span>independent / 01</span>
+            <span>maker's guild</span>
+            <span>sidequest</span>
+            <span aria-hidden="true">fieldnotes</span>
+            <span aria-hidden="true">independent / 01</span>
+            <span aria-hidden="true">maker's guild</span>
+            <span aria-hidden="true">sidequest</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="container how-grid">
+        <div>
+          <div class="section-heading">
+            <span class="eyebrow mono" style="color:var(--coral)">The first 20 minutes</span>
+
+            <h2 class="display">
+              Clarity is a practice, not a personality trait.
+            </h2>
+
+            <p>
+              You don’t need to become a different kind of person to build something. You need a thoughtful question,
+              a little evidence, and a guide who knows what to ask next.
+            </p>
+          </div>
+
+          <div class="steps">
+            <div class="step">
+              <span class="step-num">01</span>
+              <div>
+                <h3>Unpack what you know</h3>
+                <p>Find the skills, stories, and tiny obsessions that make you useful to someone specific.</p>
+              </div>
+              <span class="step-icon">⌖</span>
+            </div>
+
+            <div class="step">
+              <span class="step-num">02</span>
+              <div>
+                <h3>Find the live problem</h3>
+                <p>Turn a broad “I could help” into a real person, a real friction, and a reason to care now.</p>
+              </div>
+              <span class="step-icon">♧</span>
+            </div>
+
+            <div class="step">
+              <span class="step-num">03</span>
+              <div>
+                <h3>Make a small bet</h3>
+                <p>Leave with a test you can run this week — not a five-year plan you’ll avoid next month.</p>
+              </div>
+              <span class="step-icon">◉</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-board" data-tilt>
+          <div class="eyebrow mono">A BUSINESS TAKES SHAPE</div>
+          <div class="sketch-title display">Start with a thread.<br>Follow the tug.</div>
+          <div class="sketch-line"></div>
+          <span class="sketch-arrow">→</span>
+
+          <div class="sketch-card one">
+            <strong>your skill</strong>
+            <small>“I can make complicated things feel simple.”</small>
+            <span class="sketch-check">✓</span>
+          </div>
+
+          <div class="sketch-card two">
+            <strong>their friction</strong>
+            <small>“I lose a day every time I try to set this up.”</small>
+            <span class="sketch-check">✓</span>
+          </div>
+
+          <div class="sketch-card three">
+            <strong>the first offer</strong>
+            <small>“Let’s fix it together in one afternoon.”</small>
+            <span class="sketch-check">✓</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="outcomes" id="outcomes">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow mono" style="color:var(--yellow)">Small starts, real movement</span>
+
+          <h2 class="display">
+            Not overnight success.<br>Something better.
+          </h2>
+
+          <p>
+            Progress has a quieter look before it has a logo. Here’s what it can sound like.
+          </p>
+        </div>
+
+        <div class="outcome-grid">
+          <article class="outcome-feature" data-tilt>
+            <div>
+              <div class="quote-mark">“</div>
+
+              <blockquote>
+                I stopped trying to invent a business and started listening for the one people were already asking me
+                for.
+              </blockquote>
+            </div>
+
+            <div class="person">
+              <div class="person-avatar">AN</div>
+
+              <div class="person-info">
+                <strong>Amara, systems designer</strong>
+                <span>From “maybe someday” to her first paid workshop</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="outcome-side">
+            <div class="metric-card" data-tilt>
+              <div class="metric-top">
+                <span class="mono">FIRST TEST</span>
+                <span>✦</span>
+              </div>
+
+              <div class="metric-value">7 days</div>
+              <div class="metric-note">from blank page to a useful experiment</div>
+            </div>
+
+            <div class="metric-card" data-tilt>
+              <div class="metric-top">
+                <span class="mono">THE QUESTION</span>
+                <span>○</span>
+              </div>
+
+              <div class="metric-value">5 calls</div>
+              <div class="metric-note">enough conversations to see a pattern</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+ MENTORS — loaded dynamically from MongoDB
+ ========================================================= -->
+
+    <section class="section mentors-section" id="mentors">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow mono" style="color:var(--coral)">Pick your person</span>
+
+          <h2 class="display">
+            Talking to Mira is step one. A mentor is step two.
+          </h2>
+
+          <p>
+            Once you have a shape for your idea, browse mentors who've already built something similar and open the
+            profile of whoever fits — you'll see how they work before you ever message them.
+          </p>
+        </div>
+
+        <div class="mentor-grid" id="mentor-grid">
+          <div class="mentor-loading">
+            Loading mentors...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="belief" id="belief">
+      <div class="container belief-grid">
+        <div class="belief-art" aria-hidden="true">
+          <div class="orbit a"></div>
+          <div class="orbit b"></div>
+          <div class="belief-sun">✦</div>
+
+          <div class="float-note one">Useful beats impressive.</div>
+          <div class="float-note two">Curiosity is data.</div>
+          <div class="float-note three">One person is a market.</div>
+        </div>
+
+        <div class="belief-copy">
+          <span class="eyebrow mono" style="color:var(--coral)">
+            The Skill to Startup point of view
+          </span>
+
+          <h2 class="display">
+            You’re not behind. You’re at the interesting part.
+          </h2>
+
+          <p>
+            Most startup advice starts with a blank canvas and a demand to think bigger. We start with the opposite:
+            the lived experience, hard-won skill, or oddly specific thing you can do better than most.
+          </p>
+
+          <ul class="belief-list">
+            <li>
+              <span>✓</span>
+              <span>Build around a real strength, not a trend.</span>
+            </li>
+
+            <li>
+              <span>✓</span>
+              <span>Talk to people before you build for people.</span>
+            </li>
+
+            <li>
+              <span>✓</span>
+              <span>Make the next step small enough to take today.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="start">
+      <div class="container cta-inner">
+        <span class="eyebrow mono" style="color:rgba(245,241,233,.72)">
+          Your turn to make a mark
+        </span>
+
+        <h2 class="display">
+          What do you know that could help?
+        </h2>
+
+        <p>
+          Bring the rough version. The half-formed thought. The skill you’ve never considered a business. Mira will
+          meet you there.
+        </p>
+
+        <button class="button" data-focus-coach>
+          Open the coach <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </section>
+
+    <footer class="container footer">
+      <div class="footer-top">
+        <div class="footer-main">
+          <a class="brand" href="index.html">
+            <span class="brand-mark">
+              <span>
+                <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor"
+                    d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+                </svg>
+              </span>
+            </span>
+            <span>skill to startup</span>
+          </a>
+
+          <p>For people building something useful, their way.</p>
+
+          <div class="footer-info">
+            <span><strong>Begin</strong> with one useful skill.</span>
+            <span><strong>Learn</strong> from real conversations.</span>
+            <span><strong>Move</strong> with a small next step.</span>
+          </div>
+
+          <div class="footer-social" aria-label="Social links">
+            <a class="social-link" href="mailto:hello@skilltostartup.com" aria-label="Email us">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor"
+                  d="M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5Zm2.2.5 6.8 5.1L18.8 7Z" />
+              </svg>
+            </a>
+
+            <a class="social-link" href="#" aria-label="Follow on Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor"
+                  d="M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Zm0 6.27a2.47 2.47 0 1 1 0-4.94 2.47 2.47 0 0 1 0 4.94ZM16.2 3H7.8A4.8 4.8 0 0 0 3 7.8v8.4A4.8 4.8 0 0 0 7.8 21h8.4a4.8 4.8 0 0 0 4.8-4.8V7.8A4.8 4.8 0 0 0 16.2 3Zm3.47 13.2a3.47 3.47 0 0 1-3.47 3.47H7.8a3.47 3.47 0 0 1-3.47-3.47V7.8A3.47 3.47 0 0 1 7.8 4.33h8.4a3.47 3.47 0 0 1 3.47 3.47Zm-1.6-8.65a.98.98 0 1 1-1.96 0 .98.98 0 0 1-1.96 0Z" />
+              </svg>
+            </a>
+
+            <a class="social-link" href="#" aria-label="Follow on LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor"
+                  d="M6.94 8.5H4.06V19.5H6.94ZM5.5 4A1.6 1.6 0 1 0 5.53 7.2 1.6 1.6 0 0 0 5.5 4ZM19.94 19.5h-2.87v-5.77c0-1.38-.03-3.15-1.92-3.15-1.93 0-2.22 1.5-2.22 3.05v5.87H10.06V8.5h2.76v1.5h.04a3.03 3.03 0 0 1 2.72-1.5c2.91 0 3.45 1.92 3.45 4.41Z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-menu" aria-label="Footer navigation">
+          <span class="footer-menu-title mono">Explore</span>
+
+          <button class="footer-menu-link" data-scroll="how-it-works">
+            <span>01</span>How it works
+          </button>
+
+          <button class="footer-menu-link" data-scroll="outcomes">
+            <span>02</span>Real beginnings
+          </button>
+
+          <button class="footer-menu-link" data-scroll="belief">
+            <span>03</span>Our approach
+          </button>
+
+          <a class="footer-menu-link accent" href="signup.html">
+            <span>04</span>Start chatting
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copyright">
+          © 2026 Skill to Startup. All rights reserved.
+        </span>
+
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <button class="back-to-top" type="button" id="back-to-top" aria-label="Back to top">
+    ↑
+  </button>
+
+  <script src="js/scripts.js"></script>
+
+</body>
+
+</html>

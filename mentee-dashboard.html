@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mentee Dashboard — Skill to Startup</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+
+    <style>
+        /* =========================================================
+   SCROLL PROGRESS BAR
+========================================================= */
+
+        .scroll-progress {
+            position: fixed;
+            inset: 0 auto auto 0;
+            z-index: 40;
+            width: var(--progress, 0%);
+            height: 3px;
+            background: linear-gradient(90deg, var(--coral), var(--yellow), var(--teal));
+            box-shadow: 0 0 18px rgba(230, 102, 74, 0.24);
+            transition: width 0.08s linear;
+        }
+
+        /* =========================================================
+       MENTEE DASHBOARD
+    ========================================================= */
+
+        .mentee-dashboard {
+            padding: 140px 0 0;
+        }
+
+        /* =========================================================
+   FOOTER SPACING
+========================================================= */
+
+        .mentee-dashboard>.footer {
+            margin-top: 90px;
+            padding-bottom: 90px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 36px;
+        }
+
+        .dashboard-header-copy {
+            max-width: 700px;
+        }
+
+        .dashboard-eyebrow {
+            margin-bottom: 10px;
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .dashboard-title {
+            margin: 0;
+            font-family: "Fraunces", serif;
+            font-size: clamp(38px, 5vw, 64px);
+            line-height: 0.98;
+            letter-spacing: -0.04em;
+        }
+
+        .dashboard-description {
+            max-width: 620px;
+            margin: 16px 0 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+       NAV LINK HOVER / ACTIVE ANIMATION
+    ========================================================= */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-left: 36px;
+            font-size: 0.88rem;
+            color: var(--muted);
+        }
+
+        .nav-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            border: 0;
+            padding: 0;
+            color: var(--muted);
+            background: transparent;
+            text-decoration: none;
+            transform: translateY(0);
+            transition:
+                color 0.25s var(--motion-smooth),
+                transform 0.25s var(--motion-smooth);
+        }
+
+        .nav-link:hover {
+            color: var(--ink);
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            right: 50%;
+            bottom: -8px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--coral);
+            transform: translateX(-50%);
+            transition:
+                left 0.35s var(--motion-smooth),
+                right 0.35s var(--motion-smooth);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.is-active::after {
+            left: 0;
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .nav-link.is-active {
+            color: var(--ink);
+        }
+
+        /* =========================================================
+       STATS
+    ========================================================= */
+
+        .mentee-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .mentee-stat {
+            padding: 22px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: var(--paper);
+        }
+
+        .mentee-stat-label {
+            margin-bottom: 8px;
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .mentee-stat-value {
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+
+        /* =========================================================
+       MAIN MENTOR / CHAT AREA
+    ========================================================= */
+
+        .mentorship-workspace {
+            display: grid;
+            grid-template-columns: 330px minmax(0, 1fr);
+            min-height: 650px;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--paper);
+            box-shadow: 0 20px 60px rgba(20, 20, 20, 0.07);
+        }
+
+        /* =========================================================
+       MENTOR SIDEBAR
+    ========================================================= */
+
+        .mentor-sidebar {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            border-right: 1px solid var(--line);
+            background: #faf9f6;
+        }
+
+        .mentor-sidebar-header {
+            padding: 24px 22px 18px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .mentor-sidebar-title {
+            margin: 0;
+            font-size: 19px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .mentor-sidebar-subtitle {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .mentor-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .mentor-list-empty {
+            padding: 35px 22px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .mentor-item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            gap: 13px;
+            padding: 17px 18px;
+            border: 0;
+            border-bottom: 1px solid rgba(20, 20, 20, 0.07);
+            background: transparent;
+            color: var(--ink);
+            text-align: left;
+            cursor: pointer;
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .mentor-item:hover {
+            background: rgba(20, 20, 20, 0.035);
+        }
+
+        .mentor-item.is-active {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .mentor-item-avatar {
+            display: grid;
+            place-items: center;
+            width: 46px;
+            height: 46px;
+            flex: 0 0 46px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: var(--paper);
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+        }
+
+        .mentor-item.is-active .mentor-item-avatar {
+            background: var(--paper);
+            color: var(--ink);
+        }
+
+        .mentor-item-content {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .mentor-item-name-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .mentor-item-name {
+            margin: 0;
+            overflow: hidden;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .mentor-item-unread {
+            display: inline-grid;
+            place-items: center;
+            min-width: 19px;
+            height: 19px;
+            padding: 0 5px;
+            border-radius: 20px;
+            background: var(--ink);
+            color: var(--paper);
+            font-family: "DM Mono", monospace;
+            font-size: 9px;
+        }
+
+        .mentor-item.is-active .mentor-item-unread {
+            background: var(--paper);
+            color: var(--ink);
+        }
+
+        .mentor-item-role {
+            margin: 4px 0 0;
+            overflow: hidden;
+            color: var(--muted);
+            font-size: 12px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .mentor-item.is-active .mentor-item-role {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .mentor-item-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 7px;
+            color: var(--muted);
+            font-family: "DM Mono", monospace;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .mentor-item.is-active .mentor-item-status {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .mentor-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #3f8f5f;
+        }
+
+        /* =========================================================
+       CHAT PANEL
+    ========================================================= */
+
+        .mentee-chat {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            min-height: 650px;
+            background: var(--paper);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            min-height: 82px;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .chat-person {
+            display: flex;
+            align-items: center;
+            min-width: 0;
+            gap: 13px;
+        }
+
+        .chat-avatar {
+            display: grid;
+            place-items: center;
+            width: 48px;
+            height: 48px;
+            flex: 0 0 48px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: var(--paper);
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+        }
+
+        .chat-person-copy {
+            min-width: 0;
+        }
+
+        .chat-person-name {
+            margin: 0;
+            overflow: hidden;
+            font-size: 17px;
+            font-weight: 600;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chat-person-role {
+            margin: 4px 0 0;
+            overflow: hidden;
+            color: var(--muted);
+            font-size: 12px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            gap: 7px;
+            font-family: "DM Mono", monospace;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--muted);
+        }
+
+        .chat-status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #3f8f5f;
+        }
+
+        /* =========================================================
+   CHAT MESSAGES — WHATSAPP STYLE
+========================================================= */
+
+        .chat-body {
+            flex: 1;
+            height: 0;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 24px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: #efeae2;
+            scroll-behavior: smooth;
+        }
+
+        .chat-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 350px;
+            padding: 30px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.65;
+            text-align: center;
+        }
+
+        /* Each message takes the full chat width */
+        .message-row {
+            display: flex;
+            width: 100%;
+            margin: 0;
+        }
+
+        /* My messages → RIGHT */
+        .message-row.mine {
+            justify-content: flex-end;
+        }
+
+        /* Other person's messages → LEFT */
+        .message-row.theirs {
+            justify-content: flex-start;
+        }
+
+        /* Message bubble */
+        .message-bubble {
+            display: inline-block;
+            width: fit-content;
+            max-width: min(65%, 430px);
+            padding: 7px 10px 6px;
+            border-radius: 8px;
+            box-sizing: border-box;
+
+            font-size: 13.5px;
+            line-height: 1.45;
+
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+        }
+
+        /* My message → WhatsApp green */
+        .message-row.mine .message-bubble {
+            background: #d9fdd3;
+            color: #111b21;
+
+            border-bottom-right-radius: 3px;
+        }
+
+        /* Other person's message → off-white */
+        .message-row.theirs .message-bubble {
+            background: #fffdf8;
+            color: #111b21;
+
+            border: 1px solid rgba(20, 20, 20, 0.05);
+            border-bottom-left-radius: 3px;
+        }
+
+        /* Message time */
+        .message-time {
+            display: inline-block;
+            margin-left: 8px;
+
+            font-family: "DM Mono", monospace;
+            font-size: 8px;
+            line-height: 1;
+
+            color: #667781;
+            opacity: 0.85;
+
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+
+            white-space: nowrap;
+        }
+
+        /* =========================================================
+   RESPONSIVE CHAT BUBBLES
+========================================================= */
+
+        @media (max-width: 900px) {
+            .message-bubble {
+                max-width: 72%;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .chat-body {
+                padding: 18px 12px;
+                gap: 4px;
+            }
+
+            .message-bubble {
+                max-width: 84%;
+                padding: 7px 9px 6px;
+                font-size: 13px;
+            }
+
+            .message-time {
+                margin-left: 7px;
+                font-size: 7.5px;
+            }
+        }
+
+        /* =========================================================
+       CHAT STATUS
+    ========================================================= */
+
+        .chat-message-status {
+            min-height: 20px;
+            padding: 6px 20px 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =========================================================
+       CHAT FORM
+    ========================================================= */
+
+        .chat-form {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            padding: 10px 12px;
+            border-top: 1px solid var(--line);
+            background: #f0f2f5;
+        }
+
+        .chat-input {
+            flex: 1;
+            width: 100%;
+            min-height: 44px;
+            max-height: 140px;
+            resize: none;
+            padding: 13px 15px;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            outline: none;
+            background: #faf9f6;
+            color: var(--ink);
+            font: inherit;
+            font-size: 14px;
+            line-height: 1.5;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .chat-input::placeholder {
+            color: var(--muted);
+        }
+
+        .chat-input:focus {
+            border-color: var(--ink);
+            box-shadow: 0 0 0 3px rgba(20, 20, 20, 0.06);
+        }
+
+        .chat-send {
+            min-width: 84px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+
+        /* =========================================================
+       NO MENTORS STATE
+    ========================================================= */
+
+        .no-mentor-state {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            min-height: 650px;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .no-mentor-state.is-visible {
+            display: flex;
+        }
+
+        .no-mentor-inner {
+            max-width: 420px;
+        }
+
+        .no-mentor-icon {
+            display: grid;
+            place-items: center;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #f1eee7;
+            font-family: "DM Mono", monospace;
+            font-size: 16px;
+        }
+
+        .no-mentor-title {
+            margin: 0;
+            font-family: "Fraunces", serif;
+            font-size: 28px;
+            letter-spacing: -0.03em;
+        }
+
+        .no-mentor-text {
+            margin: 12px 0 24px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        /* =========================================================
+       LOADING
+    ========================================================= */
+
+        .dashboard-loading {
+            padding: 50px;
+            color: var(--muted);
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+        @media (max-width: 900px) {
+            .mentorship-workspace {
+                grid-template-columns: 280px minmax(0, 1fr);
+            }
+
+            .message-bubble {
+                max-width: 76%;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .mentee-dashboard {
+                padding-top: 120px;
+            }
+
+            .dashboard-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .mentee-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .mentorship-workspace {
+                grid-template-columns: 1fr;
+                min-height: 0;
+            }
+
+            .mentor-sidebar {
+                max-height: 310px;
+                border-right: 0;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .mentor-list {
+                max-height: 220px;
+            }
+
+            .mentee-chat {
+                min-height: 600px;
+            }
+
+            .chat-body {
+                height: 420px;
+                flex: none;
+            }
+
+            .no-mentor-state {
+                min-height: 500px;
+            }
+
+            .nav-links {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.open {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 58px;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 8px;
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                background: var(--card);
+                box-shadow: 0 8px 22px rgba(38, 67, 64, 0.08);
+            }
+
+            .nav-links.open .nav-link {
+                padding: 12px 14px;
+                text-align: left;
+                border-radius: 10px;
+            }
+
+            .nav-links.open .nav-link::after {
+                display: none;
+            }
+
+            .nav-links.open .nav-link:hover {
+                background: var(--paper-deep);
+                transform: none;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .mentee-dashboard {
+                padding-top: 105px;
+                padding-bottom: 0;
+            }
+
+            .mentee-dashboard>.footer {
+                margin-top: 60px;
+                padding-bottom: 60px;
+            }
+
+            .dashboard-title {
+                font-size: 42px;
+            }
+
+            .dashboard-description {
+                font-size: 14px;
+            }
+
+            .mentor-sidebar-header {
+                padding: 20px 16px 15px;
+            }
+
+            .mentor-item {
+                padding: 14px 15px;
+            }
+
+            .chat-header {
+                padding: 14px 16px;
+            }
+
+            .chat-status {
+                display: none;
+            }
+
+            .chat-body {
+                padding: 20px 14px;
+            }
+
+            .message-bubble {
+                max-width: 88%;
+                padding: 8px 11px;
+                font-size: 13px;
+            }
+
+            .chat-form {
+                padding: 10px;
+            }
+
+            .chat-send {
+                min-width: 70px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+    <header class="site-header">
+        <div class="container nav">
+
+            <a class="brand" href="index.html" aria-label="Skill to Startup home">
+                <span class="brand-mark">S</span>
+
+                <span class="brand-text">
+                    Skill to Startup
+                </span>
+            </a>
+
+            <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+                <a class="nav-link" href="index.html">
+                    Home
+                </a>
+
+                <a class="nav-link" href="mentee-dashboard.html">
+                    Dashboard
+                </a>
+
+                <a class="nav-link" href="mentors.html">
+                    Find mentors
+                </a>
+
+            </nav>
+
+            <div class="nav-actions">
+
+                <a class="button button-quiet account-link" href="profile.html">
+
+                    <span class="avatar-dot" id="nav-avatar">
+
+                        --
+
+                    </span>
+
+                    My profile
+
+                </a>
+
+                <a class="button button-quiet" href="index.html" id="nav-signout" data-sign-out>
+                    Sign out
+                </a>
+
+                <button class="button button-quiet mobile-menu" id="mobile-menu" aria-expanded="false" type="button">
+                    Menu
+                </button>
+
+            </div>
+
+        </div>
+    </header>
+
+    <!-- =========================================================
+     MAIN
+========================================================= -->
+
+    <main class="mentee-dashboard">
+
+        <div class="container">
+
+            <!-- Dashboard heading -->
+
+            <section class="dashboard-header">
+
+                <div class="dashboard-header-copy">
+
+                    <div class="dashboard-eyebrow">
+                        Mentee dashboard
+                    </div>
+
+                    <h1 class="dashboard-title" id="mentee-welcome">
+                        Welcome back.
+                    </h1>
+
+                    <p class="dashboard-description">
+                        Stay connected with your mentors,
+                        continue your conversations, and keep
+                        moving forward with your goals.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+             STATS
+        ================================================= -->
+
+            <section class="mentee-stats" aria-label="Mentorship statistics">
+
+                <article class="mentee-stat">
+
+                    <div class="mentee-stat-label">
+                        Connected mentors
+                    </div>
+
+                    <div class="mentee-stat-value" id="mentee-active-mentors">
+                        0
+                    </div>
+
+                </article>
+
+                <article class="mentee-stat">
+
+                    <div class="mentee-stat-label">
+                        Conversations
+                    </div>
+
+                    <div class="mentee-stat-value" id="mentee-conversations">
+                        0
+                    </div>
+
+                </article>
+
+                <article class="mentee-stat">
+
+                    <div class="mentee-stat-label">
+                        Unread messages
+                    </div>
+
+                    <div class="mentee-stat-value" id="mentee-unread">
+                        0
+                    </div>
+
+                </article>
+
+            </section>
+
+            <!-- =================================================
+             MENTORS + CHAT
+        ================================================= -->
+
+            <section class="mentorship-workspace" aria-label="Mentors and conversations">
+
+                <!-- =================================================
+                 MENTOR LIST
+            ================================================= -->
+
+                <aside class="mentor-sidebar">
+
+                    <div class="mentor-sidebar-header">
+
+                        <h2 class="mentor-sidebar-title">
+                            My mentors
+                        </h2>
+
+                        <p class="mentor-sidebar-subtitle">
+                            Select a mentor to view your conversation.
+                        </p>
+
+                    </div>
+
+                    <div class="mentor-list" id="mentor-list">
+                        <div class="dashboard-loading">
+                            Loading mentors...
+                        </div>
+                    </div>
+
+                </aside>
+
+                <!-- =================================================
+                 CHAT
+            ================================================= -->
+
+                <section class="mentee-chat" id="mentee-chat" aria-label="Mentor conversation">
+
+                    <!-- Chat header -->
+
+                    <header class="chat-header">
+
+                        <div class="chat-person">
+
+                            <div class="chat-avatar" id="chat-avatar">
+                                --
+                            </div>
+
+                            <div class="chat-person-copy">
+
+                                <h2 class="chat-person-name" id="chat-name">
+                                    Select a mentor
+                                </h2>
+
+                                <p class="chat-person-role" id="chat-role">
+                                    Your conversation will appear here.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="chat-status" id="chat-status-indicator">
+                            <span class="chat-status-dot"></span>
+                            Connected
+                        </div>
+
+                    </header>
+
+                    <!-- Messages -->
+
+                    <div class="chat-body" id="chat-body" aria-live="polite">
+                        <div class="chat-empty">
+                            Select a mentor from the list to start
+                            or continue a conversation.
+                        </div>
+                    </div>
+
+                    <!-- Status -->
+
+                    <div class="chat-message-status" id="chat-message-status" aria-live="polite"></div>
+
+                    <!-- Message form -->
+
+                    <form class="chat-form" id="chat-form">
+
+                        <textarea class="chat-input" id="chat-input" rows="1" maxlength="5000"
+                            placeholder="Write a message..." aria-label="Write a message"></textarea>
+
+                        <button class="button button-primary chat-send" id="chat-send" type="submit">
+                            Send
+                        </button>
+
+                    </form>
+
+                </section>
+
+                <!-- =================================================
+                 NO MENTOR STATE
+            ================================================= -->
+
+                <section class="no-mentor-state" id="no-mentor-state">
+
+                    <div class="no-mentor-inner">
+
+                        <div class="no-mentor-icon">
+                            STS
+                        </div>
+
+                        <h2 class="no-mentor-title">
+                            No connected mentors yet
+                        </h2>
+
+                        <p class="no-mentor-text">
+                            Once a mentor connection becomes active,
+                            your mentor will appear here and you can
+                            start chatting directly from your dashboard.
+                        </p>
+
+                        <a class="button button-primary" href="mentors.html">
+                            Find a mentor
+                        </a>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+        </div>
+
+        <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+
+        <footer class="container footer">
+
+            <div class="footer-top">
+
+                <div class="footer-main">
+
+                    <a class="brand" href="index.html">
+
+                        <span class="brand-mark">
+
+                            <span>
+
+                                <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+
+                                    <path fill="currentColor"
+                                        d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+
+                                </svg>
+
+                            </span>
+
+                        </span>
+
+                        <span>
+                            skill to startup
+                        </span>
+
+                    </a>
+
+                    <p>
+                        For people building something useful, their way.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-menu" aria-label="Footer navigation">
+
+                    <span class="footer-menu-title mono">
+                        Explore
+                    </span>
+
+                    <a class="footer-menu-link" href="index.html">
+
+                        <span>01</span>
+                        Home
+
+                    </a>
+
+                    <a class="footer-menu-link" href="mentee-dashboard.html">
+
+                        <span>02</span>
+                        Dashboard
+
+                    </a>
+
+                    <a class="footer-menu-link" href="mentors.html">
+
+                        <span>03</span>
+                        Find a mentor
+
+                    </a>
+
+                    <a class="footer-menu-link accent" href="profile.html">
+
+                        <span>04</span>
+                        My Profile
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span class="footer-copyright">
+                    © 2026 Skill to Startup. All rights reserved.
+                </span>
+
+                <div class="footer-legal">
+
+                    <a href="privacy-policy.html">
+                        Privacy Policy
+                    </a>
+
+                    <a href="terms-of-service.html">
+                        Terms of Service
+                    </a>
+
+                </div>
+
+            </div>
+
+        </footer>
+
+        </div>
+
+
+        <button class="back-to-top" type="button" id="back-to-top" aria-label="Back to top">
+
+            ↑
+
+        </button>
+
+    </main>
+
+    <!-- =========================================================
+     SHARED SCRIPT
+========================================================= -->
+
+    <script src="js/scripts.js"></script>
+
+    <!-- =========================================================
+     MENTEE DASHBOARD SCRIPT
+========================================================= -->
+
+    <script>
+        (() => {
+            "use strict";
+
+            /* =====================================================
+               ELEMENTS
+            ===================================================== */
+
+            const mentorList =
+                document.querySelector("#mentor-list");
+
+            const chatBody =
+                document.querySelector("#chat-body");
+
+            const chatAvatar =
+                document.querySelector("#chat-avatar");
+
+            const chatName =
+                document.querySelector("#chat-name");
+
+            const chatRole =
+                document.querySelector("#chat-role");
+
+            const chatForm =
+                document.querySelector("#chat-form");
+
+            const chatInput =
+                document.querySelector("#chat-input");
+
+            const chatSend =
+                document.querySelector("#chat-send");
+
+            const chatStatus =
+                document.querySelector("#chat-message-status");
+
+            const welcome =
+                document.querySelector("#mentee-welcome");
+
+            const activeMentorsEl =
+                document.querySelector("#mentee-active-mentors");
+
+            const conversationsEl =
+                document.querySelector("#mentee-conversations");
+
+            const unreadEl =
+                document.querySelector("#mentee-unread");
+
+            const noMentorState =
+                document.querySelector("#no-mentor-state");
+
+            const menteeChat =
+                document.querySelector("#mentee-chat");
+
+            /* =====================================================
+               STATE
+            ===================================================== */
+
+            let matches = [];
+            let activeMatchId = null;
+            let refreshTimer = null;
+            let isSending = false;
+
+            const requestedMentorId =
+                new URLSearchParams(
+                    window.location.search
+                ).get("mentorId");
+
+            /* =====================================================
+               HELPERS
+            ===================================================== */
+
+            const getInitials = (name = "") => {
+                const parts = String(name)
+                    .trim()
+                    .split(/\s+/)
+                    .filter(Boolean);
+
+                if (!parts.length) {
+                    return "--";
+                }
+
+                if (parts.length === 1) {
+                    return parts[0]
+                        .slice(0, 2)
+                        .toUpperCase();
+                }
+
+                return (
+                    parts[0][0] +
+                    parts[parts.length - 1][0]
+                ).toUpperCase();
+            };
+
+            const escapeHtml = (value = "") => {
+                return String(value)
+                    .replaceAll("&", "&amp;")
+                    .replaceAll("<", "&lt;")
+                    .replaceAll(">", "&gt;")
+                    .replaceAll('"', "&quot;")
+                    .replaceAll("'", "&#039;");
+            };
+
+            const formatMessageTime = (timestamp) => {
+                if (!timestamp) {
+                    return "";
+                }
+
+                const date = new Date(timestamp);
+
+                if (Number.isNaN(date.getTime())) {
+                    return "";
+                }
+
+                return date.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                });
+            };
+
+            const getMentorFromMatch = (match) => {
+                if (!match) {
+                    return null;
+                }
+
+                return (
+                    match.mentor ||
+                    match.mentorProfile ||
+                    match.user ||
+                    null
+                );
+            };
+
+            const getMentorName = (match) => {
+                const mentor =
+                    getMentorFromMatch(match);
+
+                return (
+                    mentor?.name ||
+                    mentor?.fullName ||
+                    "Mentor"
+                );
+            };
+
+            const getMentorRole = (match) => {
+                const mentor =
+                    getMentorFromMatch(match);
+
+                return (
+                    mentor?.roleLine ||
+                    mentor?.title ||
+                    mentor?.expertise ||
+                    mentor?.bio ||
+                    "Mentor"
+                );
+            };
+
+            const getMatchUnreadCount = (match) => {
+                const count =
+                    Number(match?.unreadCount);
+
+                return Number.isFinite(count)
+                    ? count
+                    : 0;
+            };
+
+            /* =====================================================
+               MESSAGE SENDER CHECK
+            ===================================================== */
+
+            const isMyMessage = (message) => {
+                const me = getCachedUser();
+
+                if (!me?._id) {
+                    return false;
+                }
+
+                const sender =
+                    message?.sender;
+
+                const senderId =
+                    typeof sender === "object"
+                        ? sender?._id
+                        : sender;
+
+                if (senderId) {
+                    return (
+                        String(senderId) ===
+                        String(me._id)
+                    );
+                }
+
+                const senderRole =
+                    sender?.role ||
+                    message?.senderRole ||
+                    "";
+
+                return senderRole === "mentee";
+            };
+
+            /* =====================================================
+               UPDATE WELCOME
+            ===================================================== */
+
+            const updateWelcome = (user) => {
+                if (!welcome || !user) {
+                    return;
+                }
+
+                const name =
+                    user.name ||
+                    user.fullName ||
+                    "there";
+
+                welcome.textContent =
+                    `Welcome back, ${name}.`;
+            };
+
+            /* =====================================================
+               RENDER STATS
+            ===================================================== */
+
+            const renderStats = () => {
+                const activeMatches =
+                    matches.filter(
+                        (match) =>
+                            match.status === "active"
+                    );
+
+                const unreadCount =
+                    activeMatches.reduce(
+                        (total, match) =>
+                            total +
+                            getMatchUnreadCount(match),
+                        0
+                    );
+
+                if (activeMentorsEl) {
+                    activeMentorsEl.textContent =
+                        activeMatches.length;
+                }
+
+                if (conversationsEl) {
+                    conversationsEl.textContent =
+                        activeMatches.length;
+                }
+
+                if (unreadEl) {
+                    unreadEl.textContent =
+                        unreadCount;
+                }
+            };
+
+            /* =====================================================
+               RENDER MENTOR LIST
+            ===================================================== */
+
+            const renderMentorList = () => {
+                if (!mentorList) {
+                    return;
+                }
+
+                const activeMatches =
+                    matches.filter(
+                        (match) =>
+                            match.status === "active"
+                    );
+
+                if (!activeMatches.length) {
+                    mentorList.innerHTML = `
+                    <div class="mentor-list-empty">
+                        You don't have any connected
+                        mentors yet.
+                    </div>
+                `;
+                    return;
+                }
+
+                mentorList.innerHTML =
+                    activeMatches
+                        .map((match) => {
+                            const name =
+                                getMentorName(match);
+
+                            const role =
+                                getMentorRole(match);
+
+                            const unread =
+                                getMatchUnreadCount(match);
+
+                            const isActive =
+                                String(match._id) ===
+                                String(activeMatchId);
+
+                            return `
+                            <button
+                                class="mentor-item ${isActive
+                                    ? "is-active"
+                                    : ""
+                                }"
+                                type="button"
+                                data-match-id="${escapeHtml(
+                                    match._id
+                                )}"
+                            >
+                                <div class="mentor-item-avatar">
+                                    ${escapeHtml(
+                                    getInitials(name)
+                                )}
+                                </div>
+
+                                <div class="mentor-item-content">
+
+                                    <div class="mentor-item-name-row">
+
+                                        <p class="mentor-item-name">
+                                            ${escapeHtml(name)}
+                                        </p>
+
+                                        ${unread > 0
+                                    ? `
+                                                    <span class="mentor-item-unread">
+                                                        ${unread}
+                                                    </span>
+                                                `
+                                    : ""
+                                }
+
+                                    </div>
+
+                                    <p class="mentor-item-role">
+                                        ${escapeHtml(role)}
+                                    </p>
+
+                                    <div class="mentor-item-status">
+                                        <span class="mentor-status-dot"></span>
+                                        Connected
+                                    </div>
+
+                                </div>
+                            </button>
+                        `;
+                        })
+                        .join("");
+
+                mentorList
+                    .querySelectorAll("[data-match-id]")
+                    .forEach((button) => {
+                        button.addEventListener(
+                            "click",
+                            () => {
+                                const matchId =
+                                    button.dataset.matchId;
+
+                                selectConversation(matchId);
+                            }
+                        );
+                    });
+            };
+
+            /* =====================================================
+               SELECT CONVERSATION
+            ===================================================== */
+
+            const selectConversation = async (
+                matchId,
+                shouldFocus = true
+            ) => {
+                const match =
+                    matches.find(
+                        (item) =>
+                            String(item._id) ===
+                            String(matchId)
+                    );
+
+                if (!match) {
+                    return;
+                }
+
+                activeMatchId = match._id;
+
+                const name =
+                    getMentorName(match);
+
+                const role =
+                    getMentorRole(match);
+
+                if (chatAvatar) {
+                    chatAvatar.textContent =
+                        getInitials(name);
+                }
+
+                if (chatName) {
+                    chatName.textContent =
+                        name;
+                }
+
+                if (chatRole) {
+                    chatRole.textContent =
+                        role;
+                }
+
+                if (chatStatus) {
+                    chatStatus.textContent =
+                        "Loading conversation...";
+                }
+
+                renderMentorList();
+
+                if (chatBody) {
+                    chatBody.innerHTML = `
+                    <div class="chat-empty">
+                        Loading conversation...
+                    </div>
+                `;
+                }
+
+                await loadMessages(
+                    activeMatchId,
+                    false
+                );
+
+                if (shouldFocus) {
+                    setTimeout(() => {
+                        chatInput?.focus();
+                    }, 100);
+                }
+            };
+
+            /* =====================================================
+               LOAD MATCHES
+            ===================================================== */
+
+            const loadMatches = async (
+                silent = false
+            ) => {
+                try {
+                    const data =
+                        await apiFetch(
+                            "/api/matches"
+                        );
+
+                    matches =
+                        Array.isArray(data)
+                            ? data
+                            : Array.isArray(data?.matches)
+                                ? data.matches
+                                : [];
+
+                    renderStats();
+
+                    const activeMatches =
+                        matches.filter(
+                            (match) =>
+                                match.status === "active"
+                        );
+
+                    renderMentorList();
+
+                    if (!activeMatches.length) {
+                        activeMatchId = null;
+
+                        if (menteeChat) {
+                            menteeChat.style.display =
+                                "none";
+                        }
+
+                        if (noMentorState) {
+                            noMentorState.classList.add(
+                                "is-visible"
+                            );
+                        }
+
+                        return;
+                    }
+
+                    if (noMentorState) {
+                        noMentorState.classList.remove(
+                            "is-visible"
+                        );
+                    }
+
+                    if (menteeChat) {
+                        menteeChat.style.display =
+                            "flex";
+                    }
+
+                    const requestedMatch =
+                        requestedMentorId
+                            ? activeMatches.find((match) => {
+
+                                const mentor =
+                                    getMentorFromMatch(match);
+
+                                return (
+                                    mentor &&
+                                    String(mentor._id) ===
+                                    String(requestedMentorId)
+                                );
+
+                            })
+                            : null;
+
+                    const activeStillExists =
+                        activeMatches.some(
+                            (match) =>
+                                String(match._id) ===
+                                String(activeMatchId)
+                        );
+
+                    if (requestedMatch) {
+
+                        await selectConversation(
+                            requestedMatch._id,
+                            false
+                        );
+
+                        /*
+                         * Remove mentorId from the URL after
+                         * opening the requested conversation.
+                         */
+
+                        window.history.replaceState(
+                            {},
+                            document.title,
+                            "mentee-dashboard.html"
+                        );
+
+                    } else if (
+                        !activeMatchId ||
+                        !activeStillExists
+                    ) {
+
+                        await selectConversation(
+                            activeMatches[0]._id,
+                            false
+                        );
+
+                    } else {
+
+                        renderMentorList();
+
+                    }
+
+                } catch (error) {
+                    console.error(
+                        "Mentor loading error:",
+                        error
+                    );
+
+                    if (!silent && mentorList) {
+                        mentorList.innerHTML = `
+                        <div class="mentor-list-empty">
+                            Unable to load your mentors.
+                            <br /><br />
+                            ${escapeHtml(
+                            error.message ||
+                            "Please try again."
+                        )}
+                        </div>
+                    `;
+                    }
+                }
+            };
+
+            /* =====================================================
+               LOAD MESSAGES
+            ===================================================== */
+
+            const loadMessages = async (
+                matchId,
+                silent = false
+            ) => {
+                if (!matchId) {
+                    return;
+                }
+
+                try {
+                    const data =
+                        await apiFetch(
+                            `/api/matches/${encodeURIComponent(
+                                matchId
+                            )}/messages`
+                        );
+
+                    const messages =
+                        Array.isArray(data)
+                            ? data
+                            : Array.isArray(data?.messages)
+                                ? data.messages
+                                : [];
+
+                    renderMessages(
+                        messages,
+                        silent
+                    );
+
+                    if (chatStatus) {
+                        chatStatus.textContent =
+                            "Connected";
+                    }
+
+                    /*
+                     * Refresh match data so unread
+                     * counts update after messages
+                     * are marked as read.
+                     */
+
+                    await refreshMatchData(true);
+
+                } catch (error) {
+                    console.error(
+                        "Message loading error:",
+                        error
+                    );
+
+                    if (!silent) {
+                        if (chatStatus) {
+                            chatStatus.textContent =
+                                "Unable to load";
+                        }
+
+                        if (chatBody) {
+                            chatBody.innerHTML = `
+                            <div class="chat-empty">
+                                Unable to load this
+                                conversation.
+                                <br /><br />
+                                ${escapeHtml(
+                                error.message ||
+                                "Please try again."
+                            )}
+                            </div>
+                        `;
+                        }
+                    }
+                }
+            };
+
+            /* =====================================================
+               RENDER MESSAGES
+            ===================================================== */
+
+            const renderMessages = (
+                messages,
+                silent = false
+            ) => {
+                if (!chatBody) {
+                    return;
+                }
+
+                if (!messages.length) {
+                    chatBody.innerHTML = `
+                    <div class="chat-empty">
+                        No messages yet.
+                        <br />
+                        Start the conversation
+                        with your mentor.
+                    </div>
+                `;
+
+                    if (chatStatus) {
+                        chatStatus.textContent =
+                            "Connected";
+                    }
+
+                    return;
+                }
+
+                const wasNearBottom =
+                    chatBody.scrollHeight -
+                    chatBody.scrollTop -
+                    chatBody.clientHeight <
+                    120;
+
+                chatBody.innerHTML =
+                    messages
+                        .map((message) => {
+                            const mine =
+                                isMyMessage(message);
+
+                            const messageText =
+                                message?.text ||
+                                message?.message ||
+                                message?.content ||
+                                "";
+
+                            const timestamp =
+                                message?.createdAt ||
+                                message?.created_at ||
+                                message?.timestamp;
+
+                            return `
+                            <div
+                                class="message-row ${mine
+                                    ? "mine"
+                                    : "theirs"
+                                }"
+                            >
+                                <div class="message-bubble">
+                                    ${escapeHtml(
+                                    messageText
+                                )}
+
+                                    <span class="message-time">
+                                        ${escapeHtml(
+                                    formatMessageTime(
+                                        timestamp
+                                    )
+                                )}
+                                    </span>
+                                </div>
+                            </div>
+                        `;
+                        })
+                        .join("");
+
+                if (
+                    wasNearBottom ||
+                    !silent
+                ) {
+                    chatBody.scrollTop =
+                        chatBody.scrollHeight;
+                }
+            };
+
+            /* =====================================================
+               REFRESH MATCH DATA
+            ===================================================== */
+
+            const refreshMatchData =
+                async (silent = true) => {
+                    try {
+                        const data =
+                            await apiFetch(
+                                "/api/matches"
+                            );
+
+                        matches =
+                            Array.isArray(data)
+                                ? data
+                                : Array.isArray(data?.matches)
+                                    ? data.matches
+                                    : [];
+
+                        renderStats();
+
+                        const activeMatches =
+                            matches.filter(
+                                (match) =>
+                                    match.status ===
+                                    "active"
+                            );
+
+                        if (!activeMatches.length) {
+                            activeMatchId = null;
+                            return;
+                        }
+
+                        /*
+                         * Keep the currently selected
+                         * mentor whenever possible.
+                         */
+
+                        const currentMatch =
+                            activeMatches.find(
+                                (match) =>
+                                    String(
+                                        match._id
+                                    ) ===
+                                    String(
+                                        activeMatchId
+                                    )
+                            );
+
+                        if (!currentMatch) {
+                            await selectConversation(
+                                activeMatches[0]._id,
+                                false
+                            );
+
+                            return;
+                        }
+
+                        renderMentorList();
+
+                    } catch (error) {
+                        if (!silent) {
+                            console.error(
+                                "Match refresh error:",
+                                error
+                            );
+                        }
+                    }
+                };
+
+            /* =====================================================
+               SEND MESSAGE
+            ===================================================== */
+
+            chatForm?.addEventListener(
+                "submit",
+                async (event) => {
+                    event.preventDefault();
+
+                    if (
+                        isSending ||
+                        !activeMatchId
+                    ) {
+                        return;
+                    }
+
+                    const text =
+                        chatInput.value.trim();
+
+                    if (!text) {
+                        chatInput.focus();
+                        return;
+                    }
+
+                    isSending = true;
+
+                    if (chatSend) {
+                        chatSend.disabled = true;
+                    }
+
+                    if (chatInput) {
+                        chatInput.disabled = true;
+                    }
+
+                    if (chatStatus) {
+                        chatStatus.textContent =
+                            "Sending...";
+                    }
+
+                    try {
+                        await apiFetch(
+                            `/api/matches/${encodeURIComponent(
+                                activeMatchId
+                            )}/messages`,
+                            {
+                                method: "POST",
+                                body: JSON.stringify({
+                                    text,
+                                }),
+                            }
+                        );
+
+                        chatInput.value = "";
+
+                        await loadMessages(
+                            activeMatchId
+                        );
+
+                        if (chatStatus) {
+                            chatStatus.textContent =
+                                "Connected";
+                        }
+
+                        chatInput.focus();
+
+                    } catch (error) {
+                        console.error(
+                            "Message sending error:",
+                            error
+                        );
+
+                        if (chatStatus) {
+                            chatStatus.textContent =
+                                error.message ||
+                                "Unable to send message.";
+                        }
+
+                    } finally {
+                        isSending = false;
+
+                        if (chatSend) {
+                            chatSend.disabled = false;
+                        }
+
+                        if (chatInput) {
+                            chatInput.disabled = false;
+                        }
+                    }
+                }
+            );
+
+            /* =====================================================
+               ENTER TO SEND
+            ===================================================== */
+
+            chatInput?.addEventListener(
+                "keydown",
+                (event) => {
+                    if (
+                        event.key === "Enter" &&
+                        !event.shiftKey
+                    ) {
+                        event.preventDefault();
+                        chatForm?.requestSubmit();
+                    }
+                }
+            );
+
+            /* =====================================================
+               AUTO-RESIZE TEXTAREA
+            ===================================================== */
+
+            chatInput?.addEventListener(
+                "input",
+                () => {
+                    chatInput.style.height =
+                        "auto";
+
+                    chatInput.style.height =
+                        Math.min(
+                            chatInput.scrollHeight,
+                            140
+                        ) + "px";
+                }
+            );
+
+            /* =====================================================
+               AUTO REFRESH CURRENT CHAT
+            ===================================================== */
+
+            const startRefreshTimer = () => {
+                if (refreshTimer) {
+                    clearInterval(
+                        refreshTimer
+                    );
+                }
+
+                refreshTimer =
+                    setInterval(
+                        async () => {
+                            if (!activeMatchId) {
+                                return;
+                            }
+
+                            await loadMessages(
+                                activeMatchId,
+                                true
+                            );
+                        },
+                        5000
+                    );
+            };
+
+            /* =====================================================
+               CLEANUP
+            ===================================================== */
+
+            window.addEventListener(
+                "beforeunload",
+                () => {
+                    if (refreshTimer) {
+                        clearInterval(
+                            refreshTimer
+                        );
+                    }
+                }
+            );
+
+            /* =====================================================
+               AUTH CHECK
+            ===================================================== */
+
+            const initializeDashboard = async () => {
+                if (
+                    typeof isSignedIn !== "function" ||
+                    !isSignedIn()
+                ) {
+                    window.location.href =
+                        "signin.html";
+
+                    return;
+                }
+
+                try {
+                    const response =
+                        await apiFetch(
+                            "/api/auth/me"
+                        );
+
+                    /*
+                     * Support both possible API response shapes:
+                     *
+                     * { user: {...} }
+                     *
+                     * OR
+                     *
+                     * { ...user }
+                     */
+
+                    const user =
+                        response?.user ||
+                        response;
+
+                    console.log(
+                        "Mentee dashboard user:",
+                        user
+                    );
+
+                    if (
+                        !user ||
+                        user.role !== "mentee"
+                    ) {
+                        console.error(
+                            "Mentee dashboard: invalid user or role",
+                            user
+                        );
+
+                        if (
+                            user?.role === "mentor"
+                        ) {
+                            window.location.href =
+                                "mentor-dashboard.html";
+                        } else {
+                            window.location.href =
+                                "signin.html";
+                        }
+
+                        return;
+                    }
+
+                    updateWelcome(user);
+
+                    /*
+                     * Load all active mentor connections.
+                     */
+
+                    await loadMatches();
+
+                    startRefreshTimer();
+
+                } catch (error) {
+                    console.error(
+                        "Mentee dashboard authentication error:",
+                        error
+                    );
+
+                    /*
+                     * Only clear the session when the server
+                     * explicitly says the authentication failed.
+                     */
+
+                    if (error?.status === 401) {
+                        localStorage.removeItem(
+                            "sts_token"
+                        );
+
+                        localStorage.removeItem(
+                            "sts_user"
+                        );
+
+                        window.location.href =
+                            "signin.html";
+
+                        return;
+                    }
+
+                    /*
+                     * Do NOT destroy a valid login because
+                     * of a temporary dashboard/API error.
+                     */
+
+                    const cachedUser =
+                        getCachedUser();
+
+                    if (
+                        cachedUser &&
+                        cachedUser.role === "mentee"
+                    ) {
+                        updateWelcome(
+                            cachedUser
+                        );
+
+                        try {
+                            await loadMatches();
+                            startRefreshTimer();
+
+                        } catch (loadError) {
+                            console.error(
+                                "Unable to load mentee dashboard:",
+                                loadError
+                            );
+                        }
+
+                        return;
+                    }
+
+                    window.location.href =
+                        "signin.html";
+                }
+            };
+
+            /* =====================================================
+               START
+            ===================================================== */
+
+            initializeDashboard();
+
+            /* =========================================================
+            ACTIVE NAVIGATION LINK
+            ========================================================= */
+
+            const setActiveNavLink = () => {
+                const navLinks = document.querySelectorAll(
+                    ".nav-links .nav-link"
+                );
+
+                if (!navLinks.length) {
+                    return;
+                }
+
+                const currentPage =
+                    window.location.pathname
+                        .split("/")
+                        .pop() || "index.html";
+
+                navLinks.forEach((link) => {
+                    const linkPage =
+                        new URL(
+                            link.href,
+                            window.location.href
+                        )
+                            .pathname
+                            .split("/")
+                            .pop() || "index.html";
+
+                    link.classList.toggle(
+                        "is-active",
+                        linkPage === currentPage
+                    );
+                });
+            };
+
+            setActiveNavLink();
+
+            window.addEventListener(
+                "popstate",
+                setActiveNavLink
+            );
+
+            /* =========================================================
+   SCROLL PROGRESS BAR
+========================================================= */
+
+            const updateScrollProgress = () => {
+                const progressBar = document.getElementById("scroll-progress");
+
+                if (!progressBar) return;
+
+                const scrollTop = window.scrollY;
+                const documentHeight =
+                    document.documentElement.scrollHeight - window.innerHeight;
+
+                const progress =
+                    documentHeight > 0
+                        ? (scrollTop / documentHeight) * 100
+                        : 0;
+
+                progressBar.style.width = `${progress}%`;
+            };
+
+            window.addEventListener("scroll", updateScrollProgress, {
+                passive: true
+            });
+
+            window.addEventListener("resize", updateScrollProgress);
+
+            updateScrollProgress();
+        })();
+    </script>
+
+
+</body>
+
+</html>

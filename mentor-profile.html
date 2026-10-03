@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your mentor profile on Skill to Startup.">
+  <title>My profile — Skill to Startup</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="alternate icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="alternate icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+</head>
+
+<body class="grain">
+
+  <div class="page-loader" id="page-loader" aria-label="Loading Skill to Startup" role="status">
+    <div class="loader-inner">
+      <div class="loader-mark" aria-hidden="true">
+        <span>
+          <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor"
+              d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+          </svg>
+        </span>
+      </div>
+      <div class="loader-name">skill to startup</div>
+      <div class="loader-line"><span></span></div>
+    </div>
+  </div>
+
+  <div class="site-shell">
+
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- NAV -->
+    <nav class="nav" aria-label="Main navigation">
+
+      <a class="brand" href="index.html" aria-label="Skill to Startup home">
+        <span class="brand-mark">
+          <span>
+            <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor"
+                d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+            </svg>
+          </span>
+        </span>
+        <span>skill to startup</span>
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <a class="nav-link" href="mentor-dashboard.html">Dashboard</a>
+        <a class="nav-link is-active" href="mentor-profile.html">My profile</a>
+      </div>
+
+      <div class="nav-actions">
+        <a class="button button-quiet" href="index.html" data-sign-out>Sign out</a>
+        <button class="button button-quiet mobile-menu" id="mobile-menu" aria-expanded="false">
+          Menu
+        </button>
+      </div>
+
+    </nav>
+
+    <!-- PROFILE HERO -->
+    <section class="profile-hero">
+
+      <div class="container">
+
+        <div class="profile-card" id="mentor-profile-card">
+
+          <div class="profile-avatar" id="mentor-avatar">
+            …
+          </div>
+
+          <div class="profile-id">
+
+            <h1 class="display" id="mentor-name">
+              Loading profile…
+            </h1>
+
+            <div class="profile-id-meta">
+              <span class="role-badge">Mentor</span>
+              <span id="mentor-role-line">Loading...</span>
+              <span>·</span>
+              <span id="mentor-location">Loading...</span>
+            </div>
+
+          </div>
+
+          <div class="profile-actions">
+
+            <button class="button button-primary" type="button" id="edit-profile-btn">
+              Edit profile <span aria-hidden="true">→</span>
+            </button>
+
+            <button class="button button-quiet" type="button" id="share-profile-btn">
+              Share profile
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="profile-edit-section" id="profile-edit-section" hidden>
+      <div class="container">
+        <div class="profile-edit-card">
+
+          <div class="profile-edit-header">
+            <div>
+              <span class="eyebrow">PROFILE SETTINGS</span>
+              <h2>Edit your profile</h2>
+              <p>
+                Keep your mentor profile clear and up to date so mentees know
+                what you can help them with.
+              </p>
+            </div>
+
+            <button type="button" class="profile-edit-close" id="cancel-profile-btn" aria-label="Close profile editor">
+              ×
+            </button>
+          </div>
+
+          <form id="mentor-edit-form">
+
+            <div class="profile-form-grid">
+
+              <div class="field">
+                <label for="edit-role-line">Professional title</label>
+                <input type="text" id="edit-role-line" name="roleLine" placeholder="e.g. Full-stack developer"
+                  maxlength="100" />
+              </div>
+
+              <div class="field">
+                <label for="edit-location">Location</label>
+                <input type="text" id="edit-location" name="location" placeholder="e.g. Ranchi, India"
+                  maxlength="100" />
+              </div>
+
+              <div class="field profile-form-full">
+                <label for="edit-about">About</label>
+                <textarea id="edit-about" name="about" rows="6" maxlength="1000"
+                  placeholder="Tell mentees about your experience, what you do, and how you can help..."></textarea>
+              </div>
+
+              <div class="field profile-form-full">
+                <label for="edit-skills">Skills</label>
+                <input type="text" id="edit-skills" name="skills" placeholder="Java, Python, Web Development, UI/UX" />
+                <span class="field-hint">
+                  Separate each skill with a comma.
+                </span>
+              </div>
+
+            </div>
+
+            <div class="profile-form-divider"></div>
+
+            <div class="profile-edit-subheading">
+              <span class="eyebrow">SESSION DETAILS</span>
+              <h3>How you mentor</h3>
+            </div>
+
+            <div class="profile-form-grid">
+
+              <div class="field">
+                <label for="edit-format">Session format</label>
+                <input type="text" id="edit-format" name="format" placeholder="30 min video call" maxlength="100" />
+              </div>
+
+              <div class="field">
+                <label for="edit-price">Session price</label>
+                <input type="text" id="edit-price" name="price" placeholder="First session free" maxlength="100" />
+              </div>
+
+              <div class="field">
+                <label for="edit-responds">Response time</label>
+                <input type="text" id="edit-responds" name="responds" placeholder="Under a day" maxlength="100" />
+              </div>
+
+            </div>
+
+            <div class="profile-edit-footer">
+
+              <p id="profile-save-message" class="profile-save-message" aria-live="polite"></p>
+
+              <div class="profile-actions">
+                <button class="button button-quiet" type="button" id="cancel-profile-btn-bottom">
+                  Cancel
+                </button>
+
+                <button class="button button-primary" type="submit" id="save-profile-btn">
+                  Save profile
+                </button>
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE BODY -->
+    <section class="profile-body">
+
+      <!-- PROFILE BODY -->
+      <section class="profile-body">
+
+        <div class="container profile-grid">
+
+          <div>
+
+            <!-- ABOUT -->
+            <div class="profile-block">
+
+              <h3>About</h3>
+
+              <p id="mentor-about">
+                Loading profile information…
+              </p>
+
+            </div>
+
+            <!-- SKILLS -->
+            <div class="profile-block">
+
+              <h3>Coaches on</h3>
+
+              <div class="chip-row" id="mentor-skills">
+                <span class="skill-chip">Loading...</span>
+              </div>
+
+            </div>
+
+            <!-- REVIEWS -->
+            <div class="profile-block">
+
+              <h3>What mentees say</h3>
+
+              <div id="mentor-reviews">
+
+                <p style="color:var(--muted);">
+                  No reviews yet.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- SIDEBAR -->
+          <aside class="profile-sidebar">
+
+            <!-- STATS -->
+            <div class="stat-card">
+
+              <div class="stat-grid">
+
+                <div>
+                  <strong id="mentor-sessions">0</strong>
+                  <span>sessions given</span>
+                </div>
+
+                <div>
+                  <strong id="mentor-mentees">0</strong>
+                  <span>mentees helped</span>
+                </div>
+
+                <div>
+                  <strong id="mentor-rating">—</strong>
+                  <span>average rating</span>
+                </div>
+
+                <div>
+                  <strong id="mentor-years">0</strong>
+                  <span>yrs experience</span>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- AVAILABILITY -->
+            <div class="info-card">
+
+              <h4>This week's availability</h4>
+
+              <div class="availability-grid" id="mentor-availability">
+                <span class="availability-slot">Loading...</span>
+              </div>
+
+            </div>
+
+            <!-- SESSION DETAILS -->
+            <div class="info-card">
+
+              <h4>Session details</h4>
+
+              <ul class="info-list">
+
+                <li>
+                  <span>Format</span>
+                  <strong id="mentor-format">—</strong>
+                </li>
+
+                <li>
+                  <span>Price</span>
+                  <strong id="mentor-price">—</strong>
+                </li>
+
+                <li>
+                  <span>Responds in</span>
+                  <strong id="mentor-responds">—</strong>
+                </li>
+
+              </ul>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="container footer">
+
+        <div class="footer-top">
+
+          <div class="footer-main">
+
+            <a class="brand" href="index.html">
+
+              <span class="brand-mark">
+                <span>
+                  <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor"
+                      d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+                  </svg>
+                </span>
+              </span>
+
+              <span>skill to startup</span>
+
+            </a>
+
+            <p>For people building something useful, their way.</p>
+
+          </div>
+
+          <div class="footer-menu" aria-label="Footer navigation">
+
+            <span class="footer-menu-title mono">Explore</span>
+
+            <a class="footer-menu-link accent" href="index.html">
+              <span>01</span>Home
+            </a>
+
+            <a class="footer-menu-link" href="mentor-dashboard.html">
+              <span>02</span>Dashboard
+            </a>
+
+            <a class="footer-menu-link accent" href="mentor-profile.html">
+              <span>03</span>My profile
+
+          </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+          <span class="footer-copyright">
+            © 2026 Skill to Startup. All rights reserved.
+          </span>
+
+          <div class="footer-legal">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-service.html">Terms of Service</a>
+          </div>
+
+        </div>
+
+      </footer>
+
+  </div>
+
+  <button class="back-to-top" type="button" id="back-to-top" aria-label="Back to top">
+    ↑ </button>
+
+  <script src="js/scripts.js"></script>
+
+  <!-- DYNAMIC MENTOR PROFILE -->
+
+  <script>
+
+    (function () {
+
+      if (typeof isSignedIn !== "function" || typeof apiFetch !== "function") {
+        console.error("Skill to Startup authentication functions are unavailable.");
+        return;
+      }
+
+      /*
+       * The mentor profile must always belong to
+       * the currently signed-in mentor.
+       */
+
+      if (!isSignedIn()) {
+        window.location.href = "signin.html";
+        return;
+      }
+
+      /* =========================================================
+         PROFILE ELEMENTS
+         ========================================================= */
+
+      const avatarEl = document.querySelector("#mentor-avatar");
+      const nameEl = document.querySelector("#mentor-name");
+      const roleLineEl = document.querySelector("#mentor-role-line");
+      const locationEl = document.querySelector("#mentor-location");
+      const aboutEl = document.querySelector("#mentor-about");
+      const skillsEl = document.querySelector("#mentor-skills");
+      const reviewsEl = document.querySelector("#mentor-reviews");
+
+      const sessionsEl = document.querySelector("#mentor-sessions");
+      const menteesEl = document.querySelector("#mentor-mentees");
+      const ratingEl = document.querySelector("#mentor-rating");
+      const yearsEl = document.querySelector("#mentor-years");
+
+      const availabilityEl = document.querySelector("#mentor-availability");
+
+      const formatEl = document.querySelector("#mentor-format");
+      const priceEl = document.querySelector("#mentor-price");
+      const respondsEl = document.querySelector("#mentor-responds");
+
+      /* =========================================================
+         PROFILE ACTIONS
+         ========================================================= */
+
+      const editButton = document.querySelector("#edit-profile-btn");
+      const shareButton = document.querySelector("#share-profile-btn");
+
+      /* =========================================================
+         EDIT PROFILE ELEMENTS
+         ========================================================= */
+
+      const editSection = document.querySelector("#profile-edit-section");
+      const editForm = document.querySelector("#mentor-edit-form");
+
+      const cancelEditButton =
+        document.querySelector("#cancel-profile-btn");
+
+      const cancelEditButtonBottom =
+        document.querySelector("#cancel-profile-btn-bottom");
+
+      const editRoleLine =
+        document.querySelector("#edit-role-line");
+
+      const editLocation =
+        document.querySelector("#edit-location");
+
+      const editAbout =
+        document.querySelector("#edit-about");
+
+      const editSkills =
+        document.querySelector("#edit-skills");
+
+      const editFormat =
+        document.querySelector("#edit-format");
+
+      const editPrice =
+        document.querySelector("#edit-price");
+
+      const editResponds =
+        document.querySelector("#edit-responds");
+
+      const saveButton =
+        document.querySelector("#save-profile-btn");
+
+      const saveMessage =
+        document.querySelector("#profile-save-message");
+
+      let currentMentor = null;
+
+      /* =========================================================
+         HELPERS
+         ========================================================= */
+
+      function escapeHtml(value) {
+
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+
+      }
+
+      function getInitials(name) {
+
+        return String(name || "")
+          .split(" ")
+          .filter(Boolean)
+          .slice(0, 2)
+          .map(function (part) {
+            return part.charAt(0).toUpperCase();
+          })
+          .join("") || "—";
+
+      }
+
+      /* =========================================================
+         RENDER SKILLS
+         ========================================================= */
+
+      function renderSkills(skills) {
+
+        if (!Array.isArray(skills) || skills.length === 0) {
+
+          skillsEl.innerHTML = `
+          <span class="skill-chip">
+            Add your first skill
+          </span>
+        `;
+
+          return;
+        }
+
+        skillsEl.innerHTML = skills
+          .map(function (skill) {
+
+            return `
+            <span class="skill-chip">
+              ${escapeHtml(skill)}
+            </span>
+          `;
+
+          })
+          .join("");
+
+      }
+
+      /* =========================================================
+         RENDER REVIEWS
+         ========================================================= */
+
+      function renderReviews(reviews) {
+
+        if (!Array.isArray(reviews) || reviews.length === 0) {
+
+          reviewsEl.innerHTML = `
+          <p style="color:var(--muted);">
+            You don't have any mentee reviews yet.
+          </p>
+        `;
+
+          return;
+        }
+
+        reviewsEl.innerHTML = reviews
+          .map(function (review) {
+
+            const initials = getInitials(review.name);
+
+            return `
+            <div class="review-card">
+
+              <blockquote>
+                "${escapeHtml(review.quote || "")}"
+              </blockquote>
+
+              <div class="person">
+
+                <div class="person-avatar">
+                  ${escapeHtml(initials)}
+                </div>
+
+                <div class="person-info">
+
+                  <strong>
+                    ${escapeHtml(review.name || "Mentee")}
+                  </strong>
+
+                  <span>
+                    ${escapeHtml(review.meta || "Mentee")}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+          `;
+
+          })
+          .join("");
+
+      }
+
+      /* =========================================================
+         RENDER AVAILABILITY
+         ========================================================= */
+
+      function renderAvailability(availability) {
+
+        if (
+          !Array.isArray(availability) ||
+          availability.length === 0
+        ) {
+
+          availabilityEl.innerHTML = `
+          <span class="availability-slot">
+            No availability set
+          </span>
+        `;
+
+          return;
+        }
+
+        availabilityEl.innerHTML = availability
+          .map(function (slot) {
+
+            return `
+            <span class="availability-slot ${slot.open ? "is-open" : ""}">
+              ${escapeHtml(slot.label || "—")}
+            </span>
+          `;
+
+          })
+          .join("");
+
+      }
+
+      /* =========================================================
+         RENDER MENTOR PROFILE
+         ========================================================= */
+
+      function renderMentor(mentor) {
+
+        currentMentor = mentor;
+
+        const stats = mentor.stats || {};
+        const sessionDetails = mentor.sessionDetails || {};
+
+        const initials =
+          mentor.initials ||
+          getInitials(mentor.name);
+
+        avatarEl.textContent = initials;
+
+        nameEl.textContent =
+          mentor.name || "Mentor";
+
+        roleLineEl.textContent =
+          mentor.roleLine || "Skill to Startup mentor";
+
+        locationEl.textContent =
+          mentor.location || "Location not specified";
+
+        aboutEl.textContent =
+          mentor.about ||
+          "This mentor hasn't added an about section yet.";
+
+        sessionsEl.textContent =
+          stats.sessions ?? 0;
+
+        menteesEl.textContent =
+          stats.mentees ?? 0;
+
+        ratingEl.textContent =
+          stats.rating || "—";
+
+        yearsEl.textContent =
+          stats.years ?? 0;
+
+        formatEl.textContent =
+          sessionDetails.format || "—";
+
+        priceEl.textContent =
+          sessionDetails.price || "—";
+
+        respondsEl.textContent =
+          sessionDetails.responds || "—";
+
+        renderSkills(mentor.skills);
+        renderReviews(mentor.reviews);
+        renderAvailability(mentor.availability);
+
+        /*
+         * Keep the latest mentor profile in localStorage.
+         */
+
+        try {
+
+          localStorage.setItem(
+            "sts_user",
+            JSON.stringify(mentor)
+          );
+
+        } catch (error) {
+
+          console.warn(
+            "Could not cache mentor profile:",
+            error
+          );
+
+        }
+
+      }
+
+      /* =========================================================
+         PROFILE ERROR
+         ========================================================= */
+
+      function showProfileError(message) {
+
+        nameEl.textContent =
+          "Unable to load profile";
+
+        aboutEl.textContent =
+          message;
+
+        avatarEl.textContent =
+          "—";
+
+        roleLineEl.textContent =
+          "Please try again";
+
+        locationEl.textContent =
+          "—";
+
+      }
+
+      /* =========================================================
+         LOAD CURRENTLY SIGNED-IN USER
+         ========================================================= */
+
+      apiFetch("/api/auth/me")
+
+        .then(function (data) {
+
+          if (!data || !data.user) {
+
+            throw new Error(
+              "User profile was not returned."
+            );
+
+          }
+
+          const mentor = data.user;
+
+          /*
+           * Only mentors can access this page.
+           */
+
+          if (mentor.role !== "mentor") {
+
+            window.location.href =
+              "index.html";
+
+            return;
+          }
+
+          renderMentor(mentor);
+
+        })
+
+        .catch(function (error) {
+
+          console.error(
+            "Failed to load mentor profile:",
+            error
+          );
+
+          if (error.status === 401) {
+
+            localStorage.removeItem("sts_token");
+            localStorage.removeItem("sts_user");
+
+            window.location.href =
+              "signin.html";
+
+            return;
+          }
+
+          showProfileError(
+            "Couldn't load your profile. Please refresh the page and try again."
+          );
+
+        });
+
+      /* =========================================================
+         OPEN EDIT PROFILE
+         ========================================================= */
+
+      function openEditProfile() {
+
+        if (!currentMentor || !editSection) {
+          return;
+        }
+
+        const sessionDetails =
+          currentMentor.sessionDetails || {};
+
+        /*
+         * Fill the form with the current MongoDB data.
+         */
+
+        editRoleLine.value =
+          currentMentor.roleLine || "";
+
+        editLocation.value =
+          currentMentor.location || "";
+
+        editAbout.value =
+          currentMentor.about || "";
+
+        editSkills.value =
+          Array.isArray(currentMentor.skills)
+            ? currentMentor.skills.join(", ")
+            : "";
+
+        editFormat.value =
+          sessionDetails.format || "";
+
+        editPrice.value =
+          sessionDetails.price || "";
+
+        editResponds.value =
+          sessionDetails.responds || "";
+
+        /*
+         * Clear previous save message.
+         */
+
+        saveMessage.textContent = "";
+        saveMessage.classList.remove("is-error");
+
+        /*
+         * Show editor.
+         */
+
+        editSection.hidden = false;
+
+        /*
+         * Smoothly scroll to editor.
+         */
+
+        editSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+      /* =========================================================
+         CLOSE EDIT PROFILE
+         ========================================================= */
+
+      function closeEditProfile() {
+
+        if (!editSection) {
+          return;
+        }
+
+        editSection.hidden = true;
+
+        saveMessage.textContent = "";
+
+        saveMessage.classList.remove("is-error");
+
+      }
+
+      /* =========================================================
+         EDIT BUTTON
+         ========================================================= */
+
+      editButton?.addEventListener(
+        "click",
+        openEditProfile
+      );
+
+      /* =========================================================
+         CANCEL BUTTONS
+         ========================================================= */
+
+      cancelEditButton?.addEventListener(
+        "click",
+        closeEditProfile
+      );
+
+      cancelEditButtonBottom?.addEventListener(
+        "click",
+        closeEditProfile
+      );
+
+      /* =========================================================
+         SAVE PROFILE
+         ========================================================= */
+
+      editForm?.addEventListener(
+        "submit",
+        async function (event) {
+
+          event.preventDefault();
+
+          if (!currentMentor) {
+            return;
+          }
+
+          /*
+           * Disable save button while request is running.
+           */
+
+          saveButton.disabled = true;
+          saveButton.textContent = "Saving...";
+
+          saveMessage.textContent = "";
+          saveMessage.classList.remove("is-error");
+
+          /*
+           * Convert comma-separated skills into an array.
+           */
+
+          const skills = editSkills.value
+            .split(",")
+            .map(function (skill) {
+              return skill.trim();
+            })
+            .filter(Boolean);
+
+          /*
+           * Build update object.
+           */
+
+          const updates = {
+
+            roleLine:
+              editRoleLine.value.trim(),
+
+            location:
+              editLocation.value.trim(),
+
+            about:
+              editAbout.value.trim(),
+
+            skills:
+              skills,
+
+            sessionDetails: {
+
+              format:
+                editFormat.value.trim(),
+
+              price:
+                editPrice.value.trim(),
+
+              responds:
+                editResponds.value.trim()
+
+            }
+
+          };
+
+          try {
+
+            /*
+             * Send updated profile to backend.
+             */
+
+            const data = await apiFetch(
+              "/api/mentors/me",
+              {
+                method: "PUT",
+                body: JSON.stringify(updates)
+              }
+            );
+
+            /*
+             * Make sure backend returned
+             * the updated mentor.
+             */
+
+            if (!data || !data.mentor) {
+
+              throw new Error(
+                "Profile update failed."
+              );
+
+            }
+
+            /*
+             * Replace current profile with
+             * the updated MongoDB document.
+             */
+
+            currentMentor =
+              data.mentor;
+
+            /*
+             * Immediately update the page.
+             */
+
+            renderMentor(
+              currentMentor
+            );
+
+            /*
+             * Update local cache.
+             */
+
+            try {
+
+              localStorage.setItem(
+                "sts_user",
+                JSON.stringify(currentMentor)
+              );
+
+            } catch (error) {
+
+              console.warn(
+                "Could not update cached mentor profile:",
+                error
+              );
+
+            }
+
+            /*
+             * Show success message.
+             */
+
+            saveMessage.textContent =
+              "Profile saved successfully.";
+
+            /*
+             * Close editor after a short delay.
+             */
+
+            setTimeout(function () {
+
+              closeEditProfile();
+
+            }, 900);
+
+          } catch (error) {
+
+            console.error(
+              "Failed to update mentor profile:",
+              error
+            );
+
+            saveMessage.textContent =
+              "Couldn't save your profile. Please try again.";
+
+            saveMessage.classList.add(
+              "is-error"
+            );
+
+          } finally {
+
+            /*
+             * Re-enable save button.
+             */
+
+            saveButton.disabled = false;
+
+            saveButton.textContent =
+              "Save profile";
+
+          }
+
+        }
+      );
+
+      /* =========================================================
+         SHARE PROFILE
+         ========================================================= */
+
+      shareButton?.addEventListener(
+        "click",
+        async function () {
+
+          const shareData = {
+
+            title:
+              "My mentor profile — Skill to Startup",
+
+            text:
+              "Check out my mentor profile on Skill to Startup.",
+
+            url:
+              window.location.href
+
+          };
+
+          try {
+
+            if (navigator.share) {
+
+              await navigator.share(
+                shareData
+              );
+
+            } else if (navigator.clipboard) {
+
+              await navigator.clipboard.writeText(
+                window.location.href
+              );
+
+              alert(
+                "Profile link copied."
+              );
+
+            } else {
+
+              alert(
+                window.location.href
+              );
+
+            }
+
+          } catch (error) {
+
+            /*
+             * Closing/cancelling the native share
+             * dialog is not an actual error.
+             */
+
+            if (
+              error?.name !== "AbortError"
+            ) {
+
+              console.warn(
+                "Could not share profile:",
+                error
+              );
+
+            }
+
+          }
+
+        }
+      );
+
+    })();
+
+  </script>
+
+</body>
+
+</html>

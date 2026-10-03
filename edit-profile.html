@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Edit your Skill to Startup profile.">
+
+    <title>Edit Profile — Skill to Startup</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="alternate icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="alternate icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+
+    <style>
+        /* =========================================================
+       EDIT PROFILE PAGE
+       ========================================================= */
+
+        .edit-profile-page {
+            padding: 145px 0 100px;
+        }
+
+        .edit-profile-header {
+            max-width: 760px;
+            margin-bottom: 42px;
+        }
+
+        .edit-profile-header .eyebrow {
+            margin-bottom: 12px;
+        }
+
+        .edit-profile-header h1 {
+            margin: 0 0 12px;
+        }
+
+        .edit-profile-header p {
+            max-width: 620px;
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .edit-profile-card {
+            max-width: 820px;
+            padding: 34px;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: var(--card);
+            box-shadow: 0 10px 35px rgba(38, 67, 64, .05);
+        }
+
+        .edit-section {
+            padding: 0 0 32px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .edit-section:last-of-type {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .edit-section-heading {
+            margin-bottom: 22px;
+        }
+
+        .edit-section-heading h2 {
+            margin: 0 0 6px;
+            font-family: "Fraunces", serif;
+            font-size: 1.45rem;
+            font-weight: 600;
+        }
+
+        .edit-section-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .86rem;
+            line-height: 1.6;
+        }
+
+        .edit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .edit-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .edit-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .edit-field label {
+            font-size: .78rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .edit-field input,
+        .edit-field textarea,
+        .edit-field select {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: var(--paper);
+            color: var(--ink);
+            padding: 12px 14px;
+            font: inherit;
+            font-size: .88rem;
+            outline: none;
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+        .edit-field textarea {
+            min-height: 130px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .edit-field input:focus,
+        .edit-field textarea:focus,
+        .edit-field select:focus {
+            border-color: var(--teal-dark);
+            box-shadow: 0 0 0 3px rgba(38, 67, 64, .08);
+            background: var(--card);
+        }
+
+        .edit-field small {
+            color: var(--muted);
+            font-size: .72rem;
+            line-height: 1.5;
+        }
+
+        .edit-skills {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-skills input {
+            flex: 1;
+        }
+
+        .skill-editor-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .skill-editor-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: var(--paper-deep);
+            color: var(--ink);
+            font-size: .76rem;
+            border: 1px solid var(--line);
+        }
+
+        .skill-remove {
+            border: 0;
+            padding: 0;
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: .85rem;
+            line-height: 1;
+        }
+
+        .skill-remove:hover {
+            color: var(--coral);
+        }
+
+        .availability-editor {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .availability-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: var(--paper);
+        }
+
+        .availability-item span {
+            font-size: .82rem;
+            color: var(--ink);
+        }
+
+        .availability-item label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .72rem;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .edit-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 32px;
+            padding-top: 26px;
+            border-top: 1px solid var(--line);
+        }
+
+        .edit-actions-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .save-status {
+            min-height: 20px;
+            margin: 0;
+            font-size: .78rem;
+            color: var(--muted);
+        }
+
+        .save-status.success {
+            color: var(--teal-dark);
+        }
+
+        .save-status.error {
+            color: var(--coral);
+        }
+
+        .loading-message {
+            padding: 30px 0;
+            color: var(--muted);
+        }
+
+        .mentor-only,
+        .mentee-only {
+            display: none;
+        }
+
+        .mentor-only.visible,
+        .mentee-only.visible {
+            display: block;
+        }
+
+        .mentor-only.edit-grid.visible,
+        .mentee-only.edit-grid.visible {
+            display: grid;
+        }
+
+        @media (max-width: 700px) {
+
+            .edit-profile-page {
+                padding: 110px 0 70px;
+            }
+
+            .edit-profile-card {
+                padding: 24px 18px;
+                border-radius: 18px;
+            }
+
+            .edit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .edit-field.full {
+                grid-column: auto;
+            }
+
+            .availability-editor {
+                grid-template-columns: 1fr;
+            }
+
+            .edit-actions {
+                flex-direction: column-reverse;
+                align-items: stretch;
+            }
+
+            .edit-actions-left {
+                width: 100%;
+            }
+
+            .edit-actions-left .button,
+            .edit-actions>.button {
+                width: 100%;
+                justify-content: center;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body class="grain">
+
+    <!-- =========================================================
+       PAGE LOADER
+       ========================================================= -->
+
+    <div class="page-loader" id="page-loader" aria-label="Loading Skill to Startup" role="status">
+
+        <div class="loader-inner">
+
+            <div class="loader-mark" aria-hidden="true">
+
+                <span>
+
+                    <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+
+                        <path fill="currentColor"
+                            d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+
+                    </svg>
+
+                </span>
+
+            </div>
+
+            <div class="loader-name">
+                skill to startup
+            </div>
+
+            <div class="loader-line">
+                <span></span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="site-shell">
+
+        <div class="scroll-progress" aria-hidden="true"></div>
+
+
+        <!-- =======================================================
+         NAVIGATION
+         ======================================================= -->
+
+        <header class="site-header">
+
+            <div class="container nav">
+
+                <a class="brand" href="index.html" aria-label="Skill to Startup home">
+
+                    <span class="brand-mark">
+
+                        <span>
+
+                            <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+
+                                <path fill="currentColor"
+                                    d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+
+                            </svg>
+
+                        </span>
+
+                    </span>
+
+                    <span class="brand-text">
+                        Skill to Startup
+                    </span>
+
+                </a>
+
+
+                <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+
+                    <a class="nav-link" href="index.html">
+                        Home
+                    </a>
+
+                    <a class="nav-link" href="mentee-dashboard.html" data-role-dashboard>
+                        Dashboard
+                    </a>
+
+                    <a class="nav-link" href="mentors.html">
+                        Find mentors
+                    </a>
+
+                </nav>
+
+
+                <div class="nav-actions">
+
+                    <a class="button button-quiet account-link" href="profile.html">
+
+                        <span class="avatar-dot" id="nav-avatar">
+                            --
+                        </span>
+
+                        My profile
+
+                    </a>
+
+
+                    <a class="button button-quiet" href="signin.html" id="nav-signin">
+                        Sign in
+                    </a>
+
+
+                    <a class="button button-primary" href="signup.html" id="nav-getstarted">
+                        Get started
+                    </a>
+
+
+                    <a class="button button-quiet" href="index.html" id="nav-signout" data-sign-out hidden>
+                        Sign out
+                    </a>
+
+
+                    <button class="button button-quiet mobile-menu" id="mobile-menu" aria-expanded="false"
+                        type="button">
+                        Menu
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =======================================================
+         EDIT PROFILE
+         ======================================================= -->
+
+        <main class="edit-profile-page">
+
+            <div class="container">
+
+                <div class="edit-profile-header">
+
+                    <div class="eyebrow mono">
+                        PROFILE / EDIT
+                    </div>
+
+                    <h1 class="display">
+                        Edit your profile
+                    </h1>
+
+                    <p>
+                        Keep your profile clear and useful so the right
+                        people can understand what you're working on and
+                        how you can help each other.
+                    </p>
+
+                </div>
+
+
+                <div class="edit-profile-card" id="edit-profile-card">
+
+                    <p class="loading-message">
+                        Loading your profile…
+                    </p>
+
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <!-- =======================================================
+         FOOTER
+         ======================================================= -->
+
+        <footer class="container footer">
+
+            <div class="footer-top">
+
+                <div class="footer-main">
+
+                    <a class="brand" href="index.html">
+
+                        <span class="brand-mark">
+
+                            <span>
+
+                                <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+
+                                    <path fill="currentColor"
+                                        d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+
+                                </svg>
+
+                            </span>
+
+                        </span>
+
+                        <span>
+                            skill to startup
+                        </span>
+
+                    </a>
+
+                    <p>
+                        For people building something useful, their way.
+                    </p>
+
+                    <div class="footer-info">
+
+                        <span>
+                            <strong>Begin</strong>
+                            with one useful skill.
+                        </span>
+
+                        <span>
+                            <strong>Learn</strong>
+                            from real conversations.
+                        </span>
+
+                        <span>
+                            <strong>Move</strong>
+                            with a small next step.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="footer-menu" aria-label="Footer navigation">
+
+                    <span class="footer-menu-title mono">
+                        Explore
+                    </span>
+
+                    <a class="footer-menu-link" href="index.html">
+                        <span>01</span>
+                        Home
+                    </a>
+
+                    <a class="footer-menu-link" href="mentee-dashboard.html">
+                        <span>02</span>
+                        Dashboard
+                    </a>
+
+                    <a class="footer-menu-link accent" href="profile.html">
+                        <span>03</span>
+                        My profile
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span class="footer-copyright">
+                    © 2026 Skill to Startup. All rights reserved.
+                </span>
+
+                <div class="footer-legal">
+
+                    <a href="privacy-policy.html">
+                        Privacy Policy
+                    </a>
+
+                    <a href="terms-of-service.html">
+                        Terms of Service
+                    </a>
+
+                </div>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    <!-- =========================================================
+       BACK TO TOP
+       ========================================================= -->
+
+    <button class="back-to-top" type="button" id="back-to-top" aria-label="Back to top">
+        ↑
+    </button>
+
+
+    <!-- =========================================================
+       SHARED SCRIPT
+       ========================================================= -->
+
+    <script src="js/scripts.js"></script>
+
+
+    <!-- =========================================================
+       EDIT PROFILE SCRIPT
+       ========================================================= -->
+
+    <script>
+
+        (function () {
+
+            const card =
+                document.querySelector("#edit-profile-card");
+
+
+            if (!card) {
+                return;
+            }
+
+
+            /* =======================================================
+               HELPERS
+               ======================================================= */
+
+            function escapeHtml(value) {
+
+                return String(value ?? "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+
+            }
+
+
+            function showMessage(
+                message,
+                type
+            ) {
+
+                const status =
+                    document.querySelector("#save-status");
+
+                if (!status) {
+                    return;
+                }
+
+                status.textContent =
+                    message || "";
+
+                status.className =
+                    "save-status " +
+                    (type || "");
+
+            }
+
+
+            function normalizeSkills(
+                skills
+            ) {
+
+                if (!Array.isArray(skills)) {
+                    return [];
+                }
+
+                return skills
+                    .filter(function (skill) {
+                        return (
+                            typeof skill === "string" &&
+                            skill.trim()
+                        );
+                    })
+                    .map(function (skill) {
+                        return skill.trim();
+                    });
+
+            }
+
+
+            /* =======================================================
+               SKILL EDITOR
+               ======================================================= */
+
+            function setupSkillEditor(
+                initialSkills
+            ) {
+
+                const input =
+                    document.querySelector("#skill-input");
+
+                const addButton =
+                    document.querySelector("#add-skill-btn");
+
+                const list =
+                    document.querySelector("#skill-editor-list");
+
+
+                if (
+                    !input ||
+                    !addButton ||
+                    !list
+                ) {
+                    return;
+                }
+
+
+                let skills =
+                    normalizeSkills(
+                        initialSkills
+                    );
+
+
+                function renderSkills() {
+
+                    list.innerHTML =
+                        skills
+                            .map(function (skill, index) {
+
+                                return `
+                  <span class="skill-editor-item">
+
+                    ${escapeHtml(skill)}
+
+                    <button
+                      type="button"
+                      class="skill-remove"
+                      data-skill-index="${index}"
+                      aria-label="Remove ${escapeHtml(skill)}"
+                    >
+                      ×
+                    </button>
+
+                  </span>
+                `;
+
+                            })
+                            .join("");
+
+
+                    list
+                        .querySelectorAll(
+                            "[data-skill-index]"
+                        )
+                        .forEach(function (button) {
+
+                            button.addEventListener(
+                                "click",
+                                function () {
+
+                                    const index =
+                                        Number(
+                                            button.dataset.skillIndex
+                                        );
+
+                                    skills.splice(
+                                        index,
+                                        1
+                                    );
+
+                                    renderSkills();
+
+                                }
+                            );
+
+                        });
+
+                }
+
+
+                function addSkill() {
+
+                    const value =
+                        input.value.trim();
+
+
+                    if (!value) {
+                        return;
+                    }
+
+
+                    const exists =
+                        skills.some(
+                            function (skill) {
+
+                                return (
+                                    skill.toLowerCase() ===
+                                    value.toLowerCase()
+                                );
+
+                            }
+                        );
+
+
+                    if (!exists) {
+
+                        skills.push(value);
+
+                    }
+
+
+                    input.value = "";
+
+                    renderSkills();
+
+                }
+
+
+                addButton.addEventListener(
+                    "click",
+                    addSkill
+                );
+
+
+                input.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (event.key === "Enter") {
+
+                            event.preventDefault();
+
+                            addSkill();
+
+                        }
+
+                    }
+                );
+
+
+                renderSkills();
+
+
+                return function () {
+                    return skills;
+                };
+
+            }
+
+
+            /* =======================================================
+               AVAILABILITY
+               ======================================================= */
+
+            const defaultAvailability = [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
+            ];
+
+
+            function renderAvailability(
+                availability
+            ) {
+
+                const container =
+                    document.querySelector(
+                        "#availability-editor"
+                    );
+
+                if (!container) {
+                    return;
+                }
+
+
+                const current =
+                    Array.isArray(availability)
+                        ? availability
+                        : [];
+
+
+                container.innerHTML =
+                    defaultAvailability
+                        .map(function (day) {
+
+                            const existing =
+                                current.find(
+                                    function (slot) {
+
+                                        return (
+                                            String(
+                                                slot.label || ""
+                                            ).toLowerCase() ===
+                                            day.toLowerCase()
+                                        );
+
+                                    }
+                                );
+
+
+                            const isOpen =
+                                existing
+                                    ? Boolean(existing.open)
+                                    : false;
+
+
+                            return `
+
+                <div class="availability-item">
+
+                  <span>
+                    ${day}
+                  </span>
+
+                  <label>
+
+                    <input
+                      type="checkbox"
+                      data-availability-day="${day}"
+                      ${isOpen ? "checked" : ""}
+                    >
+
+                    Available
+
+                  </label>
+
+                </div>
+
+              `;
+
+                        })
+                        .join("");
+
+            }
+
+
+            function collectAvailability() {
+
+                return Array
+                    .from(
+                        document.querySelectorAll(
+                            "[data-availability-day]"
+                        )
+                    )
+                    .map(function (checkbox) {
+
+                        return {
+                            label:
+                                checkbox.dataset.availabilityDay,
+                            open:
+                                checkbox.checked,
+                        };
+
+                    });
+
+            }
+
+
+            /* =======================================================
+               LOAD PROFILE
+               ======================================================= */
+
+            async function loadProfile() {
+
+                if (
+                    typeof isSignedIn !== "function" ||
+                    !isSignedIn()
+                ) {
+
+                    window.location.href =
+                        "signin.html";
+
+                    return;
+
+                }
+
+
+                try {
+
+                    const response =
+                        await apiFetch(
+                            "/api/auth/me"
+                        );
+
+
+                    const user =
+                        response?.user ||
+                        response;
+
+
+                    if (!user) {
+
+                        throw new Error(
+                            "Unable to load your profile."
+                        );
+
+                    }
+
+
+                    renderForm(user);
+
+                } catch (error) {
+
+                    console.error(
+                        "Edit profile loading error:",
+                        error
+                    );
+
+
+                    if (error?.status === 401) {
+
+                        localStorage.removeItem(
+                            "sts_token"
+                        );
+
+                        localStorage.removeItem(
+                            "sts_user"
+                        );
+
+                        window.location.href =
+                            "signin.html";
+
+                        return;
+
+                    }
+
+
+                    card.innerHTML = `
+
+            <div>
+
+              <p style="margin:0 0 18px;color:var(--muted);">
+                Couldn't load your profile.
+              </p>
+
+              <button
+                class="button button-primary"
+                type="button"
+                id="retry-profile-btn"
+              >
+                Try again
+              </button>
+
+            </div>
+
+          `;
+
+
+                    const retry =
+                        document.querySelector(
+                            "#retry-profile-btn"
+                        );
+
+
+                    if (retry) {
+
+                        retry.addEventListener(
+                            "click",
+                            loadProfile
+                        );
+
+                    }
+
+                }
+
+            }
+
+
+            /* =======================================================
+               RENDER FORM
+               ======================================================= */
+
+            function renderForm(user) {
+
+                const isMentor =
+                    user.role === "mentor";
+
+
+                const isMentee =
+                    user.role === "mentee";
+
+
+                card.innerHTML = `
+
+          <form id="edit-profile-form">
+
+            <!-- =================================================
+                 BASIC INFORMATION
+                 ================================================= -->
+
+            <section class="edit-section">
+
+              <div class="edit-section-heading">
+
+                <h2>
+                  Basic information
+                </h2>
+
+                <p>
+                  These details appear on your public profile.
+                </p>
+
+              </div>
+
+
+              <div class="edit-grid">
+
+                <div class="edit-field">
+
+                  <label for="profile-name">
+                    Name
+                  </label>
+
+                  <input
+                    type="text"
+                    id="profile-name"
+                    name="name"
+                    value="${escapeHtml(user.name || "")}"
+                    required
+                  >
+
+                </div>
+
+
+                <div class="edit-field">
+
+                  <label for="profile-role-line">
+                    Role / headline
+                  </label>
+
+                  <input
+                    type="text"
+                    id="profile-role-line"
+                    name="roleLine"
+                    value="${escapeHtml(user.roleLine || "")}"
+                    placeholder="${isMentor
+                        ? "e.g. Freelance web designer"
+                        : "e.g. Aspiring web developer"
+                    }"
+                  >
+
+                </div>
+
+
+                <div class="edit-field">
+
+                  <label for="profile-location">
+                    Location
+                  </label>
+
+                  <input
+                    type="text"
+                    id="profile-location"
+                    name="location"
+                    value="${escapeHtml(user.location || "")}"
+                    placeholder="e.g. Ranchi, Jharkhand"
+                  >
+
+                </div>
+
+
+                <div class="edit-field">
+
+                  <label>
+                    Account type
+                  </label>
+
+                  <input
+                    type="text"
+                    value="${isMentor
+                        ? "Mentor"
+                        : "Mentee"
+                    }"
+                    disabled
+                  >
+
+                </div>
+
+
+                <div class="edit-field full">
+
+                  <label for="profile-about">
+                    About
+                  </label>
+
+                  <textarea
+                    id="profile-about"
+                    name="about"
+                    placeholder="Tell people a little about yourself..."
+                  >${escapeHtml(user.about || "")}</textarea>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SKILLS
+                 ================================================= -->
+
+            <section class="edit-section">
+
+              <div class="edit-section-heading">
+
+                <h2>
+                  Skills
+                </h2>
+
+                <p>
+                  Add the skills you want people to associate
+                  with your profile.
+                </p>
+
+              </div>
+
+
+              <div class="edit-skills">
+
+                <input
+                  type="text"
+                  id="skill-input"
+                  placeholder="e.g. Java, UI/UX, Python"
+                >
+
+                <button
+                  type="button"
+                  class="button button-quiet"
+                  id="add-skill-btn"
+                >
+                  Add
+                </button>
+
+              </div>
+
+
+              <div
+                class="skill-editor-list"
+                id="skill-editor-list"
+              ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MENTOR SECTION
+                 ================================================= -->
+
+            <section
+              class="edit-section mentor-only ${isMentor ? "visible" : ""
+                    }"
+              id="mentor-section"
+            >
+
+              <div class="edit-section-heading">
+
+                <h2>
+                  Mentor details
+                </h2>
+
+                <p>
+                  Help potential mentees understand how you
+                  prefer to work.
+                </p>
+
+              </div>
+
+
+              <div class="edit-grid">
+
+                <div class="edit-field">
+
+                  <label for="session-format">
+                    Session format
+                  </label>
+
+                  <input
+                    type="text"
+                    id="session-format"
+                    value="${escapeHtml(
+                        user.sessionDetails?.format ||
+                        "30 min video call"
+                    )}"
+                    placeholder="30 min video call"
+                  >
+
+                </div>
+
+
+                <div class="edit-field">
+
+                  <label for="session-price">
+                    Session price
+                  </label>
+
+                  <input
+                    type="text"
+                    id="session-price"
+                    value="${escapeHtml(
+                        user.sessionDetails?.price ||
+                        "First session free"
+                    )}"
+                    placeholder="First session free"
+                  >
+
+                </div>
+
+
+                <div class="edit-field">
+
+                  <label for="session-responds">
+                    Response time
+                  </label>
+
+                  <input
+                    type="text"
+                    id="session-responds"
+                    value="${escapeHtml(
+                        user.sessionDetails?.responds ||
+                        "Under a day"
+                    )}"
+                    placeholder="Under a day"
+                  >
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="edit-section-heading"
+                style="margin-top:28px;"
+              >
+
+                <h2 style="font-size:1.15rem;">
+                  Availability
+                </h2>
+
+                <p>
+                  Select the days you're generally available.
+                </p>
+
+              </div>
+
+
+              <div
+                class="availability-editor"
+                id="availability-editor"
+              ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MENTEE SECTION
+                 ================================================= -->
+
+            <section
+              class="edit-section mentee-only ${isMentee ? "visible" : ""
+                    }"
+              id="mentee-section"
+            >
+
+              <div class="edit-section-heading">
+
+                <h2>
+                  What you're working on
+                </h2>
+
+                <p>
+                  Give mentors a clearer picture of your current
+                  goals and needs.
+                </p>
+
+              </div>
+
+
+              <div class="edit-grid">
+
+                <div class="edit-field">
+
+                  <label for="focus-focus">
+                    Focus
+                  </label>
+
+                  <input
+                    type="text"
+                    id="focus-focus"
+                    value="${escapeHtml(
+                        user.focus?.focus || ""
+                    )}"
+                    placeholder="e.g. Web development"
+                  >
+
+                </div>
+
+
+                <div class="edit-field">
+
+                  <label for="focus-stage">
+                    Stage
+                  </label>
+
+                  <input
+                    type="text"
+                    id="focus-stage"
+                    value="${escapeHtml(
+                        user.focus?.stage || ""
+                    )}"
+                    placeholder="e.g. Learning / Building"
+                  >
+
+                </div>
+
+
+                <div class="edit-field full">
+
+                  <label for="focus-looking-for">
+                    Looking for
+                  </label>
+
+                  <textarea
+                    id="focus-looking-for"
+                    placeholder="What kind of guidance are you looking for?"
+                  >${escapeHtml(
+                        user.focus?.lookingFor || ""
+                    )}</textarea>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ACTIONS
+                 ================================================= -->
+
+            <div class="edit-actions">
+
+              <div class="edit-actions-left">
+
+                <button
+                  type="button"
+                  class="button button-quiet"
+                  id="cancel-edit-btn"
+                >
+                  Cancel
+                </button>
+
+                <p
+                  class="save-status"
+                  id="save-status"
+                  aria-live="polite"
+                ></p>
+
+              </div>
+
+
+              <button
+                type="submit"
+                class="button button-primary"
+                id="save-profile-btn"
+              >
+
+                Save changes
+
+                <span aria-hidden="true">
+                  →
+                </span>
+
+              </button>
+
+            </div>
+
+          </form>
+
+        `;
+
+
+                const getSkills =
+                    setupSkillEditor(
+                        user.skills
+                    );
+
+
+                if (isMentor) {
+
+                    renderAvailability(
+                        user.availability
+                    );
+
+                }
+
+
+                const form =
+                    document.querySelector(
+                        "#edit-profile-form"
+                    );
+
+
+                const cancelButton =
+                    document.querySelector(
+                        "#cancel-edit-btn"
+                    );
+
+
+                if (cancelButton) {
+
+                    cancelButton.addEventListener(
+                        "click",
+                        function () {
+
+                            window.location.href =
+                                "profile.html";
+
+                        }
+                    );
+
+                }
+
+
+                if (form) {
+
+                    form.addEventListener(
+                        "submit",
+                        async function (event) {
+
+                            event.preventDefault();
+
+
+                            const saveButton =
+                                document.querySelector(
+                                    "#save-profile-btn"
+                                );
+
+
+                            if (saveButton) {
+
+                                saveButton.disabled = true;
+
+                                saveButton.innerHTML =
+                                    "Saving…";
+
+                            }
+
+
+                            showMessage(
+                                "Saving your changes…",
+                                ""
+                            );
+
+
+                            try {
+
+                                const payload = {
+
+                                    name:
+                                        document.querySelector(
+                                            "#profile-name"
+                                        ).value.trim(),
+
+                                    roleLine:
+                                        document.querySelector(
+                                            "#profile-role-line"
+                                        ).value.trim(),
+
+                                    location:
+                                        document.querySelector(
+                                            "#profile-location"
+                                        ).value.trim(),
+
+                                    about:
+                                        document.querySelector(
+                                            "#profile-about"
+                                        ).value.trim(),
+
+                                    skills:
+                                        getSkills()
+
+                                };
+
+
+                                if (isMentor) {
+
+                                    payload.sessionDetails = {
+
+                                        format:
+                                            document.querySelector(
+                                                "#session-format"
+                                            ).value.trim(),
+
+                                        price:
+                                            document.querySelector(
+                                                "#session-price"
+                                            ).value.trim(),
+
+                                        responds:
+                                            document.querySelector(
+                                                "#session-responds"
+                                            ).value.trim()
+
+                                    };
+
+
+                                    payload.availability =
+                                        collectAvailability();
+
+                                }
+
+
+                                if (isMentee) {
+
+                                    payload.focus = {
+
+                                        focus:
+                                            document.querySelector(
+                                                "#focus-focus"
+                                            ).value.trim(),
+
+                                        stage:
+                                            document.querySelector(
+                                                "#focus-stage"
+                                            ).value.trim(),
+
+                                        lookingFor:
+                                            document.querySelector(
+                                                "#focus-looking-for"
+                                            ).value.trim()
+
+                                    };
+
+                                }
+
+
+                                const response =
+                                    await apiFetch(
+                                        "/api/auth/profile",
+                                        {
+                                            method: "PATCH",
+                                            body:
+                                                JSON.stringify(
+                                                    payload
+                                                )
+                                        }
+                                    );
+
+
+                                const updatedUser =
+                                    response?.user;
+
+
+                                if (updatedUser) {
+
+                                    localStorage.setItem(
+                                        "sts_user",
+                                        JSON.stringify(
+                                            updatedUser
+                                        )
+                                    );
+
+                                }
+
+
+                                showMessage(
+                                    "Profile updated successfully.",
+                                    "success"
+                                );
+
+
+                                if (saveButton) {
+
+                                    saveButton.disabled =
+                                        false;
+
+                                    saveButton.innerHTML = `
+                    Saved ✓
+                  `;
+
+                                }
+
+
+                                setTimeout(
+                                    function () {
+
+                                        window.location.href =
+                                            "profile.html";
+
+                                    },
+                                    900
+                                );
+
+
+                            } catch (error) {
+
+                                console.error(
+                                    "Profile update error:",
+                                    error
+                                );
+
+
+                                showMessage(
+                                    error.message ||
+                                    "Unable to update your profile.",
+                                    "error"
+                                );
+
+
+                                if (saveButton) {
+
+                                    saveButton.disabled =
+                                        false;
+
+                                    saveButton.innerHTML = `
+                    Save changes
+                    <span aria-hidden="true">
+                      →
+                    </span>
+                  `;
+
+                                }
+
+                            }
+
+                        }
+                    );
+
+                }
+
+            }
+
+
+            /* =======================================================
+               START
+               ======================================================= */
+
+            loadProfile();
+
+        })();
+
+    </script>
+
+</body>
+
+</html>

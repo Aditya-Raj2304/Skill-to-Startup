@@ -1,0 +1,2071 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your mentees and conversations on Skill to Startup.">
+  <title>Mentor dashboard — Skill to Startup</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="alternate icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="alternate icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+
+  <style>
+    /* =========================================================
+       MENTOR CHAT — SAME STYLE AS MENTEE CHAT
+    ========================================================= */
+
+    .thread-body {
+      flex: 1;
+      height: 0;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 24px 15px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: #efeae2;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      display: flex;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .message.is-mine {
+      justify-content: flex-end;
+      padding-right: 15px;
+      margin-left: auto;
+      background: transparent;
+    }
+
+    .message.is-other {
+      justify-content: flex-start;
+      background: transparent;
+    }
+
+    .message-bubble {
+      display: inline-block;
+      width: auto;
+      max-width: min(65%, 430px);
+      padding: 7px 10px 6px;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 13.5px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    }
+
+    .message.is-mine .message-bubble {
+      background: #d9fdd3;
+      color: #111b21;
+      border-bottom-right-radius: 3px;
+    }
+
+    .message.is-other .message-bubble {
+      background: #fffdf8;
+      color: #111b21;
+      border: 1px solid rgba(20, 20, 20, 0.05);
+      border-bottom-left-radius: 3px;
+    }
+
+    .message-time {
+      display: inline-block;
+      margin-left: 8px;
+      font-family: "DM Mono", monospace;
+      font-size: 8px;
+      line-height: 1;
+      color: #667781;
+      opacity: 0.85;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      .message-bubble {
+        max-width: 72%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .thread-body {
+        padding: 18px 12px;
+        gap: 4px;
+      }
+
+      .message-bubble {
+        max-width: 84%;
+        padding: 7px 9px 6px;
+        font-size: 13px;
+      }
+
+      .message-time {
+        margin-left: 7px;
+        font-size: 7.5px;
+      }
+    }
+  </style>
+</head>
+
+<body class="grain">
+
+  <!-- ===================== PAGE LOADER ===================== -->
+
+  <div class="page-loader" id="page-loader" aria-label="Loading Skill to Startup" role="status">
+    <div class="loader-inner">
+
+      <div class="loader-mark" aria-hidden="true">
+        <span>
+          <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor"
+              d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+          </svg>
+        </span>
+      </div>
+
+      <div class="loader-name">skill to startup</div>
+
+      <div class="loader-line">
+        <span></span>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ===================== SITE SHELL ===================== -->
+
+  <div class="site-shell">
+
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+
+    <!-- ===================== NAVIGATION ===================== -->
+
+    <nav class="nav" aria-label="Main navigation">
+
+      <a class="brand" href="index.html" aria-label="Skill to Startup home">
+
+        <span class="brand-mark">
+          <span>
+            <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor"
+                d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+            </svg>
+          </span>
+        </span>
+
+        <span>skill to startup</span>
+
+      </a>
+
+      <div class="nav-links" id="nav-links">
+
+        <a class="nav-link" href="index.html">
+          Home
+        </a>
+
+        <a class="nav-link is-active" href="mentor-dashboard.html">
+          Dashboard
+        </a>
+
+      </div>
+
+      <div class="nav-actions">
+
+        <a class="button button-quiet account-link" href="profile.html">
+          <span class="avatar-dot" id="nav-avatar">--</span>My profile
+        </a>
+
+        <a class="button button-quiet" href="index.html" data-sign-out>
+          Sign out
+        </a>
+
+        <button class="button button-quiet mobile-menu" id="mobile-menu" aria-expanded="false">
+          Menu
+        </button>
+
+      </div>
+
+    </nav>
+
+
+    <!-- ===================== DASHBOARD ===================== -->
+
+    <div class="dashboard-shell">
+
+      <div class="container">
+
+
+        <!-- ===================== DASHBOARD HEADER ===================== -->
+
+        <div class="dashboard-head">
+
+          <span class="eyebrow mono" style="color:var(--coral)">
+            Mentor dashboard
+          </span>
+
+          <h1 class="display" id="mentor-welcome">
+            Welcome back.
+          </h1>
+
+          <p>
+            Message your mentees, review new requests, and keep track of who needs a reply.
+          </p>
+
+        </div>
+
+
+        <!-- ===================== DASHBOARD STATS ===================== -->
+
+        <div class="dashboard-stats">
+
+          <div class="dashboard-stat">
+
+            <strong id="mentor-active-mentees">
+              0
+            </strong>
+
+            <span>
+              active mentees
+            </span>
+
+          </div>
+
+
+          <div class="dashboard-stat">
+
+            <strong id="mentor-new-requests">
+              0
+            </strong>
+
+            <span>
+              new requests
+            </span>
+
+          </div>
+
+
+          <div class="dashboard-stat">
+
+            <strong id="mentor-unread-threads">
+              0
+            </strong>
+
+            <span>
+              unread threads
+            </span>
+
+          </div>
+
+
+          <div class="dashboard-stat">
+
+            <strong id="mentor-rating">
+              —
+            </strong>
+
+            <span>
+              average rating
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================== DASHBOARD GRID ===================== -->
+
+        <div class="dashboard-grid">
+
+
+          <!-- ===================== MENTEE PANEL ===================== -->
+
+          <div class="mentee-panel">
+
+            <div class="mentee-panel-head">
+
+              <input class="mentee-search" id="mentee-search" type="search" placeholder="Search mentees..."
+                aria-label="Search mentees">
+
+
+              <div class="mentee-tabs" role="tablist" aria-label="Filter mentees">
+
+                <button type="button" data-mentee-tab="all" class="is-active">
+                  All
+                </button>
+
+                <button type="button" data-mentee-tab="requests">
+                  Requests
+                </button>
+
+                <button type="button" data-mentee-tab="unread">
+                  Unread
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="mentee-list" id="mentee-list">
+            </div>
+
+          </div>
+
+
+          <!-- ===================== THREAD PANEL ===================== -->
+
+          <div class="thread-panel">
+
+
+            <!-- EMPTY STATE -->
+
+            <div id="thread-empty-state" class="thread-empty">
+
+              <div>
+
+                <p style="margin:0 0 6px;color:var(--teal-dark);font:1.05rem var(--serif);">
+                  Pick a mentee to start texting
+                </p>
+
+                <p style="margin:0;font-size:0.82rem;">
+                  Their conversation history and details will show up here.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- ACTIVE THREAD -->
+
+            <div id="thread-active" hidden>
+
+
+              <!-- THREAD HEADER -->
+
+              <div class="thread-head">
+
+                <div class="thread-head-id">
+
+                  <div class="profile-avatar" id="thread-avatar">
+                    --
+                  </div>
+
+                  <div>
+
+                    <strong id="thread-name">
+                      —
+                    </strong>
+
+                    <span id="thread-meta">
+                      —
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <div class="thread-head-actions">
+
+                  <button type="button" class="button button-quiet" id="thread-video-call" data-open-video-call>
+                    Video call
+                  </button>
+
+                  <a class="button button-quiet" id="thread-view-profile" href="profile.html?view=mentee">
+                    View profile
+                  </a>
+
+                </div>
+
+              </div>
+
+
+              <!-- THREAD MESSAGES -->
+
+              <div class="thread-body" id="thread-body">
+              </div>
+
+
+              <!-- MESSAGE FORM -->
+
+              <form class="thread-input-wrap" id="thread-form">
+
+                <textarea class="thread-input" id="thread-input" rows="1" placeholder="Write a reply..."
+                  aria-label="Reply to mentee"></textarea>
+
+                <button class="send-button" type="submit" aria-label="Send reply">
+                  ➤
+                </button>
+
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================== FOOTER ===================== -->
+
+    <footer class="container footer">
+
+      <div class="footer-top">
+
+
+        <div class="footer-main">
+
+          <a class="brand" href="index.html">
+
+            <span class="brand-mark">
+
+              <span>
+
+                <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+
+                  <path fill="currentColor"
+                    d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+
+                </svg>
+
+              </span>
+
+            </span>
+
+            <span>
+              skill to startup
+            </span>
+
+          </a>
+
+
+          <p>
+            For people building something useful, their way.
+          </p>
+
+        </div>
+
+
+        <div class="footer-menu" aria-label="Footer navigation">
+
+          <span class="footer-menu-title mono">
+            Explore
+          </span>
+
+          <a class="footer-menu-link" href="index.html">
+            <span>01</span>
+            Home
+          </a>
+
+          <a class="footer-menu-link" href="mentor-dashboard.html">
+            <span>02</span>
+            Dashboard
+          </a>
+
+          <a class="footer-menu-link accent" href="mentor-profile.html">
+            <span>03</span>
+            My profile
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span class="footer-copyright">
+          © 2026 Skill to Startup. All rights reserved.
+        </span>
+
+        <div class="footer-legal">
+
+          <a href="privacy-policy.html">
+            Privacy Policy
+          </a>
+
+          <a href="terms-of-service.html">
+            Terms of Service
+          </a>
+
+        </div>
+
+      </div>
+
+    </footer>
+
+  </div>
+
+
+  <!-- ===================== SCRIPTS ===================== -->
+
+  <script src="js/scripts.js"></script>
+
+
+  <!-- ===================== LOGGED-IN MENTOR DATA ===================== -->
+
+  <script>
+
+    (async function loadMentorDashboard() {
+
+      /* =========================================================
+         AUTH CHECK
+         ========================================================= */
+
+      if (
+        typeof isSignedIn !== "function" ||
+        typeof apiFetch !== "function"
+      ) {
+        console.error(
+          "Skill to Startup authentication functions are unavailable."
+        );
+
+        return;
+      }
+
+      if (!isSignedIn()) {
+        window.location.href = "signin.html";
+        return;
+      }
+
+
+      /* =========================================================
+         ELEMENTS
+         ========================================================= */
+
+      const welcomeEl =
+        document.querySelector("#mentor-welcome");
+
+      const activeMenteesEl =
+        document.querySelector("#mentor-active-mentees");
+
+      const newRequestsEl =
+        document.querySelector("#mentor-new-requests");
+
+      const unreadThreadsEl =
+        document.querySelector("#mentor-unread-threads");
+
+      const ratingEl =
+        document.querySelector("#mentor-rating");
+
+      const menteeListEl =
+        document.querySelector("#mentee-list");
+
+      const searchEl =
+        document.querySelector("#mentee-search");
+
+      const threadEmptyState =
+        document.querySelector("#thread-empty-state");
+
+      const threadActive =
+        document.querySelector("#thread-active");
+
+      const threadAvatar =
+        document.querySelector("#thread-avatar");
+
+      const threadName =
+        document.querySelector("#thread-name");
+
+      const threadMeta =
+        document.querySelector("#thread-meta");
+
+      const threadBody =
+        document.querySelector("#thread-body");
+
+      const threadForm =
+        document.querySelector("#thread-form");
+
+      const threadInput =
+        document.querySelector("#thread-input");
+
+      const threadViewProfile =
+        document.querySelector("#thread-view-profile");
+
+      const tabButtons =
+        document.querySelectorAll("[data-mentee-tab]");
+
+
+      /* =========================================================
+         STATE
+         ========================================================= */
+
+      let mentor = null;
+
+      let matches = [];
+
+      let filteredMatches = [];
+
+      let activeTab = "all";
+
+      let searchQuery = "";
+
+      let selectedMatch = null;
+
+      let selectedMatchId = null;
+
+
+      /* =========================================================
+         HELPERS
+         ========================================================= */
+
+      function escapeHtml(value) {
+
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+
+      }
+
+
+      function getInitials(name) {
+
+        return String(name || "")
+          .split(" ")
+          .filter(Boolean)
+          .slice(0, 2)
+          .map(function (part) {
+            return part.charAt(0).toUpperCase();
+          })
+          .join("") || "--";
+
+      }
+
+
+      function formatMessageTime(dateValue) {
+
+        if (!dateValue) {
+          return "";
+        }
+
+        const date = new Date(dateValue);
+
+        if (Number.isNaN(date.getTime())) {
+          return "";
+        }
+
+        return date.toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit"
+        });
+
+      }
+
+
+      function formatLastMessage(dateValue) {
+
+        if (!dateValue) {
+          return "";
+        }
+
+        const date = new Date(dateValue);
+
+        if (Number.isNaN(date.getTime())) {
+          return "";
+        }
+
+        const now = new Date();
+
+        const sameDay =
+          date.toDateString() === now.toDateString();
+
+        if (sameDay) {
+
+          return date.toLocaleTimeString([], {
+            hour: "numeric",
+            minute: "2-digit"
+          });
+
+        }
+
+        return date.toLocaleDateString([], {
+          day: "numeric",
+          month: "short"
+        });
+
+      }
+
+
+      /* =========================================================
+         LOAD CURRENT MENTOR
+         ========================================================= */
+
+      async function loadCurrentMentor() {
+
+        const data =
+          await apiFetch("/api/auth/me");
+
+        if (!data || !data.user) {
+          throw new Error(
+            "Current user was not returned."
+          );
+        }
+
+        mentor = data.user;
+
+        /*
+         * This dashboard is mentor-only.
+         */
+
+        if (mentor.role !== "mentor") {
+
+          window.location.href =
+            "index.html";
+
+          return false;
+        }
+
+        return true;
+      }
+
+
+      /* =========================================================
+         RENDER MENTOR HEADER
+         ========================================================= */
+
+      function renderMentorHeader() {
+
+        const firstName = mentor.name
+          ? mentor.name.trim().split(/\s+/)[0]
+          : "there";
+
+        if (welcomeEl) {
+
+          welcomeEl.textContent =
+            `Welcome back, ${firstName}.`;
+
+        }
+
+        if (ratingEl) {
+
+          ratingEl.textContent =
+            mentor.stats?.rating || "—";
+
+        }
+
+      }
+
+
+      /* =========================================================
+         LOAD MATCHES
+         ========================================================= */
+
+      async function loadMatches() {
+
+        const data =
+          await apiFetch("/api/matches");
+
+        matches =
+          Array.isArray(data?.matches)
+            ? data.matches
+            : [];
+
+        updateDashboardStats();
+
+        applyFilters();
+
+      }
+
+
+      /* =========================================================
+         DASHBOARD STATS
+         ========================================================= */
+
+      function updateDashboardStats() {
+
+        const activeCount =
+          matches.filter(function (match) {
+
+            return match.status === "active";
+
+          }).length;
+
+
+        const requestCount =
+          matches.filter(function (match) {
+
+            return match.status === "pending";
+
+          }).length;
+
+
+        const unreadCount =
+          matches.reduce(function (total, match) {
+
+            return total +
+              Number(match.unreadCount || 0);
+
+          }, 0);
+
+
+        if (activeMenteesEl) {
+
+          activeMenteesEl.textContent =
+            activeCount;
+
+        }
+
+
+        if (newRequestsEl) {
+
+          newRequestsEl.textContent =
+            requestCount;
+
+        }
+
+
+        if (unreadThreadsEl) {
+
+          unreadThreadsEl.textContent =
+            unreadCount;
+
+        }
+
+      }
+
+
+      /* =========================================================
+         FILTER MATCHES
+         ========================================================= */
+
+      function applyFilters() {
+
+        filteredMatches =
+          matches.filter(function (match) {
+
+            const mentee =
+              match.mentee || {};
+
+            const searchText =
+              [
+                mentee.name,
+                mentee.roleLine,
+                mentee.location,
+                ...(Array.isArray(mentee.skills)
+                  ? mentee.skills
+                  : [])
+              ]
+                .join(" ")
+                .toLowerCase();
+
+            const matchesSearch =
+              !searchQuery ||
+              searchText.includes(
+                searchQuery.toLowerCase()
+              );
+
+
+            let matchesTab = true;
+
+
+            if (activeTab === "requests") {
+
+              matchesTab =
+                match.status === "pending";
+
+            }
+
+
+            if (activeTab === "unread") {
+
+              matchesTab =
+                Number(match.unreadCount || 0) > 0;
+
+            }
+
+
+            return (
+              matchesSearch &&
+              matchesTab
+            );
+
+          });
+
+
+        renderMenteeList();
+
+      }
+
+
+      /* =========================================================
+         RENDER MENTEE LIST
+         ========================================================= */
+
+      function renderMenteeList() {
+
+        if (!menteeListEl) {
+          return;
+        }
+
+
+        if (filteredMatches.length === 0) {
+
+          menteeListEl.innerHTML = `
+
+          <div class="thread-empty">
+
+            <div>
+
+              <p
+                style="
+                  margin:0 0 6px;
+                  color:var(--teal-dark);
+                  font:1.05rem var(--serif);
+                "
+              >
+                ${activeTab === "requests"
+              ? "No new requests"
+              : activeTab === "unread"
+                ? "No unread conversations"
+                : searchQuery
+                  ? "No mentees found"
+                  : "No mentees yet"
+            }
+              </p>
+
+              <p
+                style="
+                  margin:0;
+                  font-size:0.82rem;
+                "
+              >
+                ${activeTab === "requests"
+              ? "New mentor requests will appear here."
+              : activeTab === "unread"
+                ? "You're all caught up."
+                : searchQuery
+                  ? "Try a different search."
+                  : "Your mentee conversations will appear here."
+            }
+              </p>
+
+            </div>
+
+          </div>
+
+        `;
+
+          return;
+        }
+
+
+        menteeListEl.innerHTML =
+          filteredMatches
+            .map(function (match) {
+
+              return renderMenteeCard(match);
+
+            })
+            .join("");
+
+      }
+
+
+      /* =========================================================
+         RENDER ONE MENTEE CARD
+         ========================================================= */
+
+      function renderMenteeCard(match) {
+
+        const mentee =
+          match.mentee || {};
+
+        const initials =
+          mentee.initials ||
+          getInitials(mentee.name);
+
+
+        const isSelected =
+          String(selectedMatchId) ===
+          String(match._id);
+
+
+        const isPending =
+          match.status === "pending";
+
+
+        const unreadCount =
+          Number(match.unreadCount || 0);
+
+
+        const lastMessage =
+          match.lastMessage;
+
+
+        let preview =
+          "No messages yet.";
+
+
+        if (lastMessage?.text) {
+
+          preview =
+            lastMessage.sentByMe
+              ? `You: ${lastMessage.text}`
+              : lastMessage.text;
+
+        }
+
+
+        const statusLabel =
+          isPending
+            ? "New request"
+            : match.status === "active"
+              ? "Active"
+              : "Declined";
+
+
+        return `
+
+        <button
+          type="button"
+          class="mentee-row ${isSelected ? "is-active" : ""}"
+          data-match-id="${escapeHtml(match._id)}"
+        >
+
+          <div class="profile-avatar">
+
+            ${escapeHtml(initials)}
+
+          </div>
+
+
+          <div class="mentee-row-main">
+
+            <div class="mentee-row-top">
+
+              <strong>
+                ${escapeHtml(
+          mentee.name || "Mentee"
+        )}
+              </strong>
+
+              <span>
+                ${escapeHtml(
+          formatLastMessage(
+            lastMessage?.createdAt
+          )
+        )}
+              </span>
+
+            </div>
+
+
+            <div class="mentee-row-meta">
+
+              ${mentee.roleLine
+            ? escapeHtml(
+              mentee.roleLine
+            )
+            : "Mentee"
+          }
+
+            </div>
+
+
+            <div class="mentee-row-preview">
+
+              ${escapeHtml(preview)}
+
+            </div>
+
+          </div>
+
+
+          <div class="mentee-row-side">
+
+            ${isPending
+            ? `
+                  <span class="mentee-status">
+                    ${escapeHtml(statusLabel)}
+                  </span>
+                `
+            : ""
+          }
+
+
+            ${unreadCount > 0
+            ? `
+                  <span class="unread-badge">
+                    ${unreadCount}
+                  </span>
+                `
+            : ""
+          }
+
+          </div>
+
+        </button>
+
+      `;
+
+      }
+
+
+      /* =========================================================
+         SELECT MENTEE
+         ========================================================= */
+
+      async function selectMatch(matchId) {
+
+        const match =
+          matches.find(function (item) {
+
+            return String(item._id) ===
+              String(matchId);
+
+          });
+
+
+        if (!match) {
+          return;
+        }
+
+
+        selectedMatch =
+          match;
+
+        selectedMatchId =
+          match._id;
+
+
+        /*
+         * Update selected row.
+         */
+
+        renderMenteeList();
+
+
+        /*
+         * Show active thread.
+         */
+
+        if (threadEmptyState) {
+
+          threadEmptyState.hidden =
+            true;
+
+        }
+
+        if (threadActive) {
+
+          threadActive.hidden =
+            false;
+
+        }
+
+
+        renderThreadHeader(match);
+
+
+        /*
+         * Pending requests cannot have
+         * an active conversation yet.
+         */
+
+        if (match.status !== "active") {
+
+          renderPendingThread(match);
+
+          return;
+        }
+
+
+        await loadMessages(match._id);
+
+      }
+
+
+      /* =========================================================
+         RENDER THREAD HEADER
+         ========================================================= */
+
+      function renderThreadHeader(match) {
+
+        const mentee =
+          match.mentee || {};
+
+        const initials =
+          mentee.initials ||
+          getInitials(mentee.name);
+
+
+        if (threadAvatar) {
+
+          threadAvatar.textContent =
+            initials;
+
+        }
+
+
+        if (threadName) {
+
+          threadName.textContent =
+            mentee.name || "Mentee";
+
+        }
+
+
+        if (threadMeta) {
+
+          const metaParts = [];
+
+          if (mentee.roleLine) {
+
+            metaParts.push(
+              mentee.roleLine
+            );
+
+          }
+
+          if (mentee.location) {
+
+            metaParts.push(
+              mentee.location
+            );
+
+          }
+
+          threadMeta.textContent =
+            metaParts.join(" · ") ||
+            "Mentee";
+
+        }
+
+
+        if (threadViewProfile) {
+
+          /*
+           * We keep the existing profile page
+           * route for now, but pass the mentee ID.
+           */
+
+          threadViewProfile.href =
+            `profile.html?view=mentee&id=${encodeURIComponent(
+              mentee._id || ""
+            )}`;
+
+        }
+
+      }
+
+
+      /* =========================================================
+         PENDING REQUEST UI
+         ========================================================= */
+
+      function renderPendingThread(match) {
+
+        if (!threadBody) {
+          return;
+        }
+
+
+        threadBody.innerHTML = `
+
+        <div
+          style="
+            padding:32px 20px;
+            text-align:center;
+          "
+        >
+
+          <p
+            style="
+              margin:0 0 8px;
+              color:var(--teal-dark);
+              font:1.15rem var(--serif);
+            "
+          >
+            New mentorship request
+          </p>
+
+          <p
+            style="
+              margin:0 auto 22px;
+              max-width:48ch;
+              color:var(--muted);
+              font-size:0.84rem;
+              line-height:1.6;
+            "
+          >
+            ${escapeHtml(
+          match.mentee?.name ||
+          "This mentee"
+        )
+          }
+            would like to connect with you.
+          </p>
+
+
+          <div
+            style="
+              display:flex;
+              justify-content:center;
+              gap:10px;
+              flex-wrap:wrap;
+            "
+          >
+
+            <button
+              type="button"
+              class="button button-primary"
+              data-match-action="active"
+              data-match-id="${escapeHtml(match._id)}"
+            >
+              Accept request
+            </button>
+
+
+            <button
+              type="button"
+              class="button button-quiet"
+              data-match-action="declined"
+              data-match-id="${escapeHtml(match._id)}"
+            >
+              Decline
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+
+        /*
+         * Hide message form while request
+         * is still pending.
+         */
+
+        if (threadForm) {
+
+          threadForm.hidden =
+            true;
+
+        }
+
+      }
+
+
+      /* =========================================================
+         LOAD MESSAGES
+         ========================================================= */
+
+      async function loadMessages(matchId) {
+
+        if (threadBody) {
+
+          threadBody.innerHTML = `
+
+          <div
+            style="
+              padding:30px;
+              text-align:center;
+              color:var(--muted);
+              font-size:0.82rem;
+            "
+          >
+            Loading conversation...
+          </div>
+
+        `;
+
+        }
+
+
+        if (threadForm) {
+
+          threadForm.hidden =
+            false;
+
+        }
+
+
+        try {
+
+          const data =
+            await apiFetch(
+              `/api/matches/${encodeURIComponent(matchId)}/messages`
+            );
+
+
+          const messages =
+            Array.isArray(data?.messages)
+              ? data.messages
+              : [];
+
+
+          /*
+           * The backend marks messages as read
+           * when this endpoint is fetched.
+           */
+
+          const selected =
+            matches.find(function (item) {
+
+              return String(item._id) ===
+                String(matchId);
+
+            });
+
+
+          if (selected) {
+
+            selected.unreadCount = 0;
+
+          }
+
+
+          updateDashboardStats();
+
+          applyFilters();
+
+
+          renderMessages(messages);
+
+        } catch (error) {
+
+          console.error(
+            "Failed to load messages:",
+            error
+          );
+
+
+          if (threadBody) {
+
+            threadBody.innerHTML = `
+
+            <div
+              style="
+                padding:30px;
+                text-align:center;
+                color:var(--coral);
+                font-size:0.82rem;
+              "
+            >
+              Couldn't load this conversation.
+              Please try again.
+            </div>
+
+          `;
+
+          }
+
+        }
+
+      }
+
+
+      /* =========================================================
+         RENDER MESSAGES
+      ========================================================= */
+
+      function renderMessages(messages) {
+
+        if (!threadBody) {
+          return;
+        }
+
+
+        if (messages.length === 0) {
+
+          threadBody.innerHTML = `
+
+          <div
+            style="
+              padding:30px;
+              text-align:center;
+              color:var(--muted);
+              font-size:0.82rem;
+            "
+          >
+            No messages yet. Start the conversation.
+          </div>
+
+        `;
+
+          return;
+
+        }
+
+
+        threadBody.innerHTML =
+          messages
+            .map(function (message) {
+
+              const isMine =
+                String(message.sender) ===
+                String(mentor._id);
+
+
+              return `
+                <div class="message ${isMine ? "is-mine" : "is-other"}">
+                  <div class="message-bubble">
+                    ${escapeHtml(message.text)}
+                    <span class="message-time">
+                      ${escapeHtml(
+                formatMessageTime(
+                  message.createdAt
+                )
+              )}
+                    </span>
+                  </div>
+                </div>
+              `;
+
+            })
+            .join("");
+
+
+        /*
+         * Scroll to the latest message.
+         */
+
+        threadBody.scrollTop =
+          threadBody.scrollHeight;
+
+      }
+
+
+      /* =========================================================
+         SEND MESSAGE
+         ========================================================= */
+
+      threadForm?.addEventListener(
+        "submit",
+        async function (event) {
+
+          event.preventDefault();
+
+
+          if (!selectedMatch) {
+            return;
+          }
+
+
+          if (
+            selectedMatch.status !==
+            "active"
+          ) {
+
+            return;
+
+          }
+
+
+          const text =
+            threadInput?.value.trim();
+
+
+          if (!text) {
+            return;
+          }
+
+
+          const sendButton =
+            threadForm.querySelector(
+              ".send-button"
+            );
+
+
+          if (sendButton) {
+
+            sendButton.disabled =
+              true;
+
+          }
+
+
+          try {
+
+            const data =
+              await apiFetch(
+                `/api/matches/${encodeURIComponent(
+                  selectedMatch._id
+                )}/messages`,
+                {
+                  method: "POST",
+                  body: JSON.stringify({
+                    text: text
+                  })
+                }
+              );
+
+
+            if (!data?.message) {
+
+              throw new Error(
+                "Message was not returned."
+              );
+
+            }
+
+
+            /*
+             * Clear input.
+             */
+
+            threadInput.value = "";
+
+
+            /*
+             * Reload conversation so the
+             * new message appears immediately.
+             */
+
+            await loadMessages(
+              selectedMatch._id
+            );
+
+
+            /*
+             * Refresh match list so the
+             * last-message preview updates.
+             */
+
+            await loadMatches();
+
+
+            /*
+             * Restore selected match because
+             * loadMatches creates a new array.
+             */
+
+            const updatedMatch =
+              matches.find(function (match) {
+
+                return String(match._id) ===
+                  String(selectedMatch._id);
+
+              });
+
+
+            if (updatedMatch) {
+
+              selectedMatch =
+                updatedMatch;
+
+            }
+
+
+          } catch (error) {
+
+            console.error(
+              "Failed to send message:",
+              error
+            );
+
+
+            alert(
+              "Couldn't send the message. Please try again."
+            );
+
+          } finally {
+
+            if (sendButton) {
+
+              sendButton.disabled =
+                false;
+
+            }
+
+          }
+
+        }
+      );
+
+
+      /* =========================================================
+         ACCEPT / DECLINE REQUEST
+         ========================================================= */
+
+      async function respondToMatch(
+        matchId,
+        status
+      ) {
+
+        try {
+
+          const data =
+            await apiFetch(
+              `/api/matches/${encodeURIComponent(matchId)}`,
+              {
+                method: "PATCH",
+                body: JSON.stringify({
+                  status: status
+                })
+              }
+            );
+
+
+          if (!data?.match) {
+
+            throw new Error(
+              "Match response was not returned."
+            );
+
+          }
+
+
+          /*
+           * Reload everything so stats,
+           * list and selected thread stay
+           * synchronized with MongoDB.
+           */
+
+          await loadMatches();
+
+
+          const updatedMatch =
+            matches.find(function (match) {
+
+              return String(match._id) ===
+                String(matchId);
+
+            });
+
+
+          if (updatedMatch) {
+
+            selectedMatch =
+              updatedMatch;
+
+            selectedMatchId =
+              updatedMatch._id;
+
+
+            renderMenteeList();
+
+            renderThreadHeader(
+              updatedMatch
+            );
+
+
+            if (
+              updatedMatch.status ===
+              "active"
+            ) {
+
+              await loadMessages(
+                updatedMatch._id
+              );
+
+            } else {
+
+              renderDeclinedThread(
+                updatedMatch
+              );
+
+            }
+
+          }
+
+        } catch (error) {
+
+          console.error(
+            "Failed to update match:",
+            error
+          );
+
+
+          alert(
+            "Couldn't update this request. Please try again."
+          );
+
+        }
+
+      }
+
+
+      /* =========================================================
+         DECLINED REQUEST UI
+         ========================================================= */
+
+      function renderDeclinedThread(match) {
+
+        if (threadBody) {
+
+          threadBody.innerHTML = `
+
+          <div
+            style="
+              padding:32px 20px;
+              text-align:center;
+            "
+          >
+
+            <p
+              style="
+                margin:0 0 8px;
+                color:var(--teal-dark);
+                font:1.1rem var(--serif);
+              "
+            >
+              Request declined
+            </p>
+
+            <p
+              style="
+                margin:0;
+                color:var(--muted);
+                font-size:0.82rem;
+              "
+            >
+              This mentorship request is no longer active.
+            </p>
+
+          </div>
+
+        `;
+
+        }
+
+
+        if (threadForm) {
+
+          threadForm.hidden =
+            true;
+
+        }
+
+      }
+
+
+      /* =========================================================
+         MENTEE LIST CLICK HANDLER
+         ========================================================= */
+
+      menteeListEl?.addEventListener(
+        "click",
+        function (event) {
+
+          const row =
+            event.target.closest(
+              "[data-match-id]"
+            );
+
+
+          if (!row) {
+            return;
+          }
+
+
+          selectMatch(
+            row.dataset.matchId
+          );
+
+        }
+      );
+
+
+      /* =========================================================
+         REQUEST ACTION CLICK HANDLER
+         ========================================================= */
+
+      threadBody?.addEventListener(
+        "click",
+        function (event) {
+
+          const button =
+            event.target.closest(
+              "[data-match-action]"
+            );
+
+
+          if (!button) {
+            return;
+          }
+
+
+          const matchId =
+            button.dataset.matchId;
+
+          const status =
+            button.dataset.matchAction;
+
+
+          if (!matchId || !status) {
+            return;
+          }
+
+
+          respondToMatch(
+            matchId,
+            status
+          );
+
+        }
+      );
+
+
+      /* =========================================================
+         SEARCH
+         ========================================================= */
+
+      searchEl?.addEventListener(
+        "input",
+        function () {
+
+          searchQuery =
+            searchEl.value.trim();
+
+          applyFilters();
+
+        }
+      );
+
+
+      /* =========================================================
+         TABS
+         ========================================================= */
+
+      tabButtons.forEach(function (button) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            activeTab =
+              button.dataset.menteeTab ||
+              "all";
+
+
+            tabButtons.forEach(
+              function (tab) {
+
+                tab.classList.toggle(
+                  "is-active",
+                  tab === button
+                );
+
+              }
+            );
+
+
+            applyFilters();
+
+          }
+        );
+
+      });
+
+
+      /* =========================================================
+         INITIAL LOAD
+         ========================================================= */
+
+      try {
+
+        const validMentor =
+          await loadCurrentMentor();
+
+
+        if (!validMentor) {
+          return;
+        }
+
+
+        renderMentorHeader();
+
+
+        await loadMatches();
+
+
+      } catch (error) {
+
+        console.error(
+          "Could not load mentor dashboard:",
+          error
+        );
+
+
+        if (error?.status === 401) {
+
+          localStorage.removeItem(
+            "sts_token"
+          );
+
+          localStorage.removeItem(
+            "sts_user"
+          );
+
+          window.location.href =
+            "signin.html";
+
+          return;
+        }
+
+
+        if (menteeListEl) {
+
+          menteeListEl.innerHTML = `
+
+          <div class="thread-empty">
+
+            <div>
+
+              <p
+                style="
+                  margin:0 0 6px;
+                  color:var(--coral);
+                  font:1.05rem var(--serif);
+                "
+              >
+                Couldn't load your dashboard
+              </p>
+
+              <p
+                style="
+                  margin:0;
+                  font-size:0.82rem;
+                "
+              >
+                Please refresh the page and try again.
+              </p>
+
+            </div>
+
+          </div>
+
+        `;
+
+        }
+
+      }
+
+    })();
+
+  </script>
+
+</body>
+
+</html>

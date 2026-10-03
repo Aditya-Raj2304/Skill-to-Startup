@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="auth-page">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join Skill to Startup as someone learning to build, or someone who's already done it.">
+  <title>Create your account — Skill to Startup</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="alternate icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="alternate icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+</head>
+
+<body class="grain auth-page">
+
+  <div class="page-loader" id="page-loader" aria-label="Loading Skill to Startup" role="status">
+    <div class="loader-inner">
+      <div class="loader-mark" aria-hidden="true"><span><svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor"
+              d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+          </svg></span></div>
+      <div class="loader-name">skill to startup</div>
+      <div class="loader-line"><span></span></div>
+    </div>
+  </div>
+
+  <main class="auth-shell">
+    <aside class="auth-aside">
+      <div class="auth-aside-top">
+        <a class="brand" href="index.html" aria-label="Skill to Startup home">
+          <span class="brand-mark"><span><svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor"
+                  d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+              </svg></span></span><span>skill to startup</span>
+        </a>
+      </div>
+
+      <div class="auth-pitch">
+        <span class="eyebrow mono" data-role-eyebrow>For people finding their footing</span>
+        <h1 class="display" data-role-heading>Bring the skill. We'll help you find the offer.</h1>
+        <p data-role-body>Answer a few honest questions and leave with a small, testable business idea — not a plan
+          you'll shelve.</p>
+      </div>
+
+      <div class="auth-quote">
+        <p>“Progress has a quieter look before it has a logo.”</p>
+        <div class="person">
+          <div class="person-avatar">MS</div>
+          <div class="person-info"><strong>Mira</strong><span>Your startup coach</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="auth-main">
+      <div class="auth-panel">
+        <div class="auth-panel-head">
+          <span class="eyebrow mono">Create your account</span>
+          <h2 class="display">Let's find your starting point.</h2>
+          <p>Already have an account? <a href="signin.html">Sign in</a></p>
+        </div>
+
+        <form id="signup-form" novalidate>
+          <div class="role-toggle" role="radiogroup" aria-label="I am joining as a">
+            <input type="radio" name="account-role" id="role-mentee" value="mentee" checked>
+            <label for="role-mentee"><strong>Mentee</strong><span>I want to build something</span></label>
+            <input type="radio" name="account-role" id="role-mentor" value="mentor">
+            <label for="role-mentor"><strong>Mentor</strong><span>I want to help someone build</span></label>
+          </div>
+
+          <div class="field-group">
+            <div class="field">
+              <label for="signup-name">Full name</label>
+              <div class="field-input-wrap">
+                <input type="text" id="signup-name" name="name" placeholder="Your name" data-validate="required"
+                  autocomplete="name" required>
+              </div>
+              <span class="field-error">Tell us your name.</span>
+            </div>
+
+            <div class="field">
+              <label for="signup-email">Email</label>
+              <div class="field-input-wrap">
+                <input type="email" id="signup-email" name="email" placeholder="you@example.com"
+                  data-validate="email" autocomplete="email" required>
+              </div>
+              <span class="field-error">Enter a valid email address.</span>
+            </div>
+
+            <div class="field">
+              <label for="signup-password">Password</label>
+              <div class="field-input-wrap">
+                <input type="password" id="signup-password" name="password" placeholder="At least 8 characters"
+                  data-validate="password" autocomplete="new-password" required>
+                <button type="button" class="password-toggle" data-target="signup-password">Show</button>
+              </div>
+              <span class="field-hint">Use at least 8 characters — mix it up a little.</span>
+              <span class="field-error">Use at least 8 characters.</span>
+            </div>
+
+            <div class="field">
+              <label for="signup-password-confirm">Confirm password</label>
+              <div class="field-input-wrap">
+                <input type="password" id="signup-password-confirm" name="password_confirm"
+                  placeholder="Type it again" data-validate="match" data-matches="signup-password"
+                  autocomplete="new-password" required>
+                <button type="button" class="password-toggle" data-target="signup-password-confirm">Show</button>
+              </div>
+              <span class="field-error">Passwords don't match.</span>
+            </div>
+          </div>
+
+          <label class="terms-line">
+            <input type="checkbox" name="terms" data-validate="required" required>
+            <span>I agree to the <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a>.</span>
+          </label>
+
+          <button type="submit" class="button button-primary auth-submit">Create account <span
+              aria-hidden="true">→</span></button>
+          <p class="auth-status" role="status"></p>
+        </form>
+
+        <div class="auth-divider">or continue with</div>
+        <div class="auth-social">
+          <button type="button" class="auth-social-btn">Continue with Google</button>
+          <button type="button" class="auth-social-btn">Continue with Apple</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>

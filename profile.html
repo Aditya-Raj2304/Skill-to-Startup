@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="View a mentor or mentee profile on Skill to Startup.">
+
+  <title>Profile — Skill to Startup</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="alternate icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="alternate icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+
+  <style>
+    /* =========================================================
+       PROFILE PAGE NAVIGATION
+       ========================================================= */
+
+    .profile-page-nav {
+      position: relative;
+    }
+
+    .profile-page-nav .nav-link {
+      position: relative;
+    }
+
+    .profile-page-nav .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--coral);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .25s ease;
+    }
+
+    .profile-page-nav .nav-link:hover,
+    .profile-page-nav .nav-link.is-active {
+      color: var(--ink);
+    }
+
+    .profile-page-nav .nav-link:hover::after,
+    .profile-page-nav .nav-link.is-active::after {
+      transform: scaleX(1);
+    }
+
+
+    /* =========================================================
+       PROFILE PAGE
+       ========================================================= */
+
+    .profile-hero {
+      padding: 150px 0 55px;
+    }
+
+    .profile-body {
+      padding: 20px 0 90px;
+    }
+
+    .profile-card {
+      min-height: 150px;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE NAV
+       ========================================================= */
+
+    @media (max-width: 680px) {
+
+      .profile-page-nav .nav-link::after {
+        display: none;
+      }
+
+    }
+  </style>
+
+</head>
+
+<body class="grain">
+
+  <!-- =========================================================
+       PAGE LOADER
+       ========================================================= -->
+
+  <div class="page-loader" id="page-loader" aria-label="Loading Skill to Startup" role="status">
+
+    <div class="loader-inner">
+
+      <div class="loader-mark" aria-hidden="true">
+
+        <span>
+
+          <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+
+            <path fill="currentColor"
+              d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 16.2 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+
+          </svg>
+
+        </span>
+
+      </div>
+
+      <div class="loader-name">
+        skill to startup
+      </div>
+
+      <div class="loader-line">
+        <span></span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="site-shell">
+
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+
+    <!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
+
+    <header class="site-header">
+
+      <div class="container nav">
+
+        <a class="brand" href="index.html" aria-label="Skill to Startup home">
+
+          <span class="brand-mark">
+
+            <span>
+
+              <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+
+                <path fill="currentColor"
+                  d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 16.2 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+
+              </svg>
+
+            </span>
+
+          </span>
+
+          <span class="brand-text">
+            Skill to Startup
+          </span>
+
+        </a>
+
+
+        <nav class="nav-links profile-page-nav" id="nav-links" aria-label="Main navigation">
+
+          <a class="nav-link" href="index.html">
+
+            Home
+
+          </a>
+
+          <a class="nav-link" href="mentee-dashboard.html" data-role-dashboard>
+
+            Dashboard
+
+          </a>
+
+          <a class="nav-link" href="mentors.html">
+
+            Find mentors
+
+          </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+          <a class="button button-quiet account-link" href="profile.html">
+
+            <span class="avatar-dot" id="nav-avatar">
+
+              --
+
+            </span>
+
+            My profile
+
+          </a>
+
+
+          <a class="button button-quiet" href="signin.html" id="nav-signin">
+
+            Sign in
+
+          </a>
+
+
+          <a class="button button-primary" href="signup.html" id="nav-getstarted">
+
+            Get started
+
+          </a>
+
+
+          <a class="button button-quiet" href="index.html" id="nav-signout" data-sign-out hidden>
+
+            Sign out
+
+          </a>
+
+
+          <button class="button button-quiet mobile-menu" id="mobile-menu" aria-expanded="false" type="button">
+
+            Menu
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- =========================================================
+     PROFILE HERO
+     ========================================================= -->
+
+    <section class="profile-hero">
+
+      <div class="container">
+
+        <div class="profile-card" id="profile-card">
+
+          <!-- Filled dynamically -->
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
+     PROFILE BODY
+     ========================================================= -->
+
+    <section class="profile-body">
+
+      <div class="container profile-grid">
+
+        <div id="profile-main">
+          <!-- Filled dynamically -->
+        </div>
+
+        <aside class="profile-sidebar" id="profile-sidebar">
+
+          <!-- Filled dynamically -->
+
+        </aside>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+    <footer class="container footer">
+
+      <div class="footer-top">
+
+        <div class="footer-main">
+
+          <a class="brand" href="index.html">
+
+            <span class="brand-mark">
+
+              <span>
+
+                <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+
+                  <path fill="currentColor"
+                    d="M12 1C12.9 7.8 16.2 12.9 16.2 23C11.1 16.2 7.8 16.2 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+
+                </svg>
+
+              </span>
+
+            </span>
+
+            <span>
+              skill to startup
+            </span>
+
+          </a>
+
+          <p>
+            For people building something useful, their way.
+          </p>
+
+          <div class="footer-info">
+
+            <span>
+              <strong>Begin</strong>
+              with one useful skill.
+            </span>
+
+            <span>
+              <strong>Learn</strong>
+              from real conversations.
+            </span>
+
+            <span>
+              <strong>Move</strong>
+              with a small next step.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="footer-menu" aria-label="Footer navigation">
+
+          <span class="footer-menu-title mono">
+            Explore
+          </span>
+
+          <a class="footer-menu-link" href="index.html">
+
+            <span>01</span>
+            Home
+
+          </a>
+
+          <a class="footer-menu-link" href="mentee-dashboard.html">
+
+            <span>02</span>
+            Dashboard
+
+          </a>
+
+          <a class="footer-menu-link accent" href="profile.html">
+
+            <span>03</span>
+            My profile
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span class="footer-copyright">
+          © 2026 Skill to Startup. All rights reserved.
+        </span>
+
+        <div class="footer-legal">
+
+          <a href="privacy-policy.html">
+            Privacy Policy
+          </a>
+
+          <a href="terms-of-service.html">
+            Terms of Service
+          </a>
+
+        </div>
+
+      </div>
+
+    </footer>
+
+  </div>
+
+  <!-- =========================================================
+       BACK TO TOP
+       ========================================================= -->
+
+  <button class="back-to-top" type="button" id="back-to-top" aria-label="Back to top">
+
+    ↑
+
+  </button>
+
+  <!-- =========================================================
+       SHARED SCRIPT
+       ========================================================= -->
+
+  <script src="js/scripts.js"></script>
+
+  <!-- =========================================================
+       PROFILE PAGE SCRIPT
+       ========================================================= -->
+
+  <script>
+
+    (function () {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      const view =
+        params.get("view") === "mentor"
+          ? "mentor"
+          : "mentee";
+
+      const id =
+        params.get("id");
+
+      const selfMode =
+        !id;
+
+
+      const cardEl =
+        document.querySelector("#profile-card");
+
+      const mainEl =
+        document.querySelector("#profile-main");
+
+      const sidebarEl =
+        document.querySelector("#profile-sidebar");
+
+
+      if (
+        !cardEl ||
+        !mainEl ||
+        !sidebarEl ||
+        typeof apiFetch === "undefined"
+      ) {
+        return;
+      }
+
+
+      /* =======================================================
+         HELPERS
+         ======================================================= */
+
+      function escapeHtml(value) {
+
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+
+      }
+
+
+      function getInitials(name) {
+
+        return String(name || "")
+          .split(" ")
+          .filter(Boolean)
+          .slice(0, 2)
+          .map(function (part) {
+            return part.charAt(0).toUpperCase();
+          })
+          .join("") || "--";
+
+      }
+
+
+      function showLoading() {
+
+        cardEl.innerHTML = `
+          <p style="margin:0;color:var(--muted);">
+            Loading profile…
+          </p>
+        `;
+
+      }
+
+
+      function showError(message) {
+
+        cardEl.innerHTML = `
+          <p style="margin:0;color:var(--muted);">
+            ${escapeHtml(message)}
+          </p>
+        `;
+
+        mainEl.innerHTML = "";
+        sidebarEl.innerHTML = "";
+
+      }
+
+
+      function chipRow(items) {
+
+        return (items || [])
+          .map(function (skill) {
+
+            return `
+              <span class="skill-chip">
+                ${escapeHtml(skill)}
+              </span>
+            `;
+
+          })
+          .join("");
+
+      }
+
+
+      /* =======================================================
+         MENTOR PROFILE
+         ======================================================= */
+
+      function renderMentor(mentor, requestState) {
+
+        const mentorName =
+          mentor.name || "Mentor";
+
+        const initials =
+          mentor.initials ||
+          getInitials(mentorName);
+
+        const roleLine =
+          mentor.roleLine ||
+          "Skill to Startup mentor";
+
+        const location =
+          mentor.location ||
+          "Location not specified";
+
+
+        const actionsHtml =
+          requestState === "signed-out"
+
+            ? `
+                <a
+                  class="button button-primary"
+                  href="signin.html">
+
+                  Sign in to connect
+
+                </a>
+              `
+
+            : requestState === "self"
+
+              ? `
+                  <button
+                    class="button button-primary"
+                    type="button"
+                    id="edit-profile-btn">
+
+                    Edit profile
+
+                    <span aria-hidden="true">
+                      →
+                    </span>
+
+                  </button>
+
+                  <button
+                    class="button button-quiet"
+                    type="button"
+                    id="share-profile-btn">
+
+                    Share profile
+
+                  </button>
+                `
+
+              : requestState === "pending"
+
+                ? `
+                    <button
+                      class="button button-quiet"
+                      disabled>
+
+                      Request sent — waiting for
+                      ${escapeHtml(mentorName.split(" ")[0])}
+
+                    </button>
+                  `
+
+                : requestState === "request"
+
+                  ? `
+                      <button
+                        class="button button-primary"
+                        id="request-mentor-btn"
+                        data-mentor-id="${escapeHtml(mentor._id)}">
+
+                        Request to connect
+
+                      </button>
+                    `
+
+                  : `
+                      <button
+                        class="button button-primary"
+                        type="button"
+                        id="message-mentor-btn"
+                        data-mentor-id="${escapeHtml(mentor._id)}">
+
+                        Message
+                        ${escapeHtml(mentorName.split(" ")[0])}
+
+                      </button>
+
+                      <button
+                        class="button button-quiet"
+                        data-open-video-call
+                        data-call-name="${escapeHtml(mentorName)}"
+                        data-call-initials="${escapeHtml(initials)}">
+
+                        Video call
+
+                      </button>
+                    `;
+
+
+        cardEl.innerHTML = `
+
+          <div class="profile-avatar">
+            ${escapeHtml(initials)}
+          </div>
+
+          <div class="profile-id">
+
+            <h1 class="display">
+              ${escapeHtml(mentorName)}
+            </h1>
+
+            <div class="profile-id-meta">
+
+              <span class="role-badge">
+                Mentor
+              </span>
+
+              <span>
+                ${escapeHtml(roleLine)}
+              </span>
+
+              <span>·</span>
+
+              <span>
+                ${escapeHtml(location)}
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="profile-actions">
+            ${actionsHtml}
+          </div>
+
+        `;
+
+
+        const reviews =
+          Array.isArray(mentor.reviews)
+            ? mentor.reviews
+            : [];
+
+
+        const stats =
+          mentor.stats || {};
+
+
+        const availability =
+          Array.isArray(mentor.availability)
+            ? mentor.availability
+            : [];
+
+
+        const sessionDetails =
+          mentor.sessionDetails || {};
+
+
+        mainEl.innerHTML = `
+
+          <div class="profile-block">
+
+            <h3>
+              About
+            </h3>
+
+            <p>
+              ${escapeHtml(
+          mentor.about ||
+          "This mentor hasn't added an about section yet."
+        )}
+            </p>
+
+          </div>
+
+
+          <div class="profile-block">
+
+            <h3>
+              Coaches on
+            </h3>
+
+            <div class="chip-row">
+
+              ${chipRow(mentor.skills)}
+
+            </div>
+
+          </div>
+
+
+          <div class="profile-block">
+
+            <h3>
+              What mentees say
+            </h3>
+
+            ${reviews.length
+
+            ? reviews.map(function (review) {
+
+              const reviewName =
+                review.name || "Mentee";
+
+              return `
+
+                      <div class="review-card">
+
+                        <blockquote>
+                          &quot;${escapeHtml(
+                review.quote || ""
+              )}&quot;
+                        </blockquote>
+
+                        <div class="person">
+
+                          <div class="person-avatar">
+
+                            ${escapeHtml(
+                getInitials(reviewName)
+              )}
+
+                          </div>
+
+                          <div class="person-info">
+
+                            <strong>
+                              ${escapeHtml(reviewName)}
+                            </strong>
+
+                            <span>
+                              ${escapeHtml(
+                review.meta || ""
+              )}
+                            </span>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    `;
+
+            }).join("")
+
+            : `
+                    <p style="color:var(--muted);">
+                      No reviews yet.
+                    </p>
+                  `
+          }
+
+          </div>
+
+        `;
+
+
+        sidebarEl.innerHTML = `
+
+          <div class="stat-card">
+
+            <div class="stat-grid">
+
+              <div>
+                <strong>
+                  ${escapeHtml(stats.sessions ?? "0")}
+                </strong>
+
+                <span>
+                  sessions given
+                </span>
+              </div>
+
+
+              <div>
+                <strong>
+                  ${escapeHtml(stats.mentees ?? "0")}
+                </strong>
+
+                <span>
+                  mentees helped
+                </span>
+              </div>
+
+
+              <div>
+                <strong>
+                  ${escapeHtml(stats.rating ?? "—")}
+                </strong>
+
+                <span>
+                  average rating
+                </span>
+              </div>
+
+
+              <div>
+                <strong>
+                  ${escapeHtml(stats.years ?? "0")}
+                </strong>
+
+                <span>
+                  yrs experience
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="info-card">
+
+            <h4>
+              This week's availability
+            </h4>
+
+            <div class="availability-grid">
+
+              ${availability.length
+
+            ? availability.map(function (slot) {
+
+              return `
+                        <span
+                          class="availability-slot ${slot.open ? "is-open" : ""
+                }">
+
+                          ${escapeHtml(slot.label || "")}
+
+                        </span>
+                      `;
+
+            }).join("")
+
+            : `
+                      <span class="availability-slot">
+                        Check with mentor
+                      </span>
+                    `
+          }
+
+            </div>
+
+          </div>
+
+
+          <div class="info-card">
+
+            <h4>
+              Session details
+            </h4>
+
+            <ul class="info-list">
+
+              <li>
+
+                <span>
+                  Format
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+            sessionDetails.format || "Video call"
+          )}
+                </strong>
+
+              </li>
+
+
+              <li>
+
+                <span>
+                  Price
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+            sessionDetails.price || "—"
+          )}
+                </strong>
+
+              </li>
+
+
+              <li>
+
+                <span>
+                  Responds in
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+            sessionDetails.responds || "Under a day"
+          )}
+                </strong>
+
+              </li>
+
+            </ul>
+
+          </div>
+
+        `;
+
+
+        rebindDynamicButtons();
+
+
+        const messageMentorButton =
+          document.querySelector("#message-mentor-btn");
+
+        if (messageMentorButton) {
+
+          messageMentorButton.addEventListener(
+            "click",
+            function () {
+
+              const mentorId =
+                messageMentorButton.dataset.mentorId;
+
+              if (!mentorId) {
+                return;
+              }
+
+              window.location.href =
+                "mentee-dashboard.html?mentorId=" +
+                encodeURIComponent(mentorId);
+
+            }
+          );
+
+        }
+
+
+        const editButton =
+          document.querySelector(
+            "#edit-profile-btn"
+          );
+
+
+        if (editButton) {
+
+          editButton.addEventListener(
+            "click",
+            function () {
+
+              window.location.href = "edit-profile.html";
+
+            }
+          );
+
+        }
+
+
+        const shareButton =
+          document.querySelector(
+            "#share-profile-btn"
+          );
+
+
+        if (shareButton) {
+
+          shareButton.addEventListener(
+            "click",
+            async function () {
+
+              try {
+
+                await navigator.clipboard.writeText(
+                  window.location.href
+                );
+
+                shareButton.textContent =
+                  "Profile link copied";
+
+                setTimeout(function () {
+
+                  shareButton.textContent =
+                    "Share profile";
+
+                }, 1800);
+
+              } catch (error) {
+
+                alert(
+                  "Copy this profile URL:\n\n" +
+                  window.location.href
+                );
+
+              }
+
+            }
+          );
+
+        }
+
+
+        const requestButton =
+          document.querySelector(
+            "#request-mentor-btn"
+          );
+
+
+        if (requestButton) {
+
+          requestButton.addEventListener(
+            "click",
+            function (event) {
+
+              const button =
+                event.currentTarget;
+
+              button.disabled = true;
+              button.textContent = "Sending…";
+
+
+              apiFetch(
+                "/api/matches",
+                {
+                  method: "POST",
+
+                  body: JSON.stringify({
+                    mentorId:
+                      button.dataset.mentorId
+                  })
+                }
+              )
+
+                .then(function () {
+
+                  renderMentor(
+                    mentor,
+                    "pending"
+                  );
+
+                })
+
+                .catch(function (error) {
+
+                  button.disabled = false;
+                  button.textContent =
+                    "Request to connect";
+
+                  alert(
+                    error.message ||
+                    "Unable to send request."
+                  );
+
+                });
+
+            }
+          );
+
+        }
+
+      }
+
+
+      /* =======================================================
+         MENTEE PROFILE
+         ======================================================= */
+
+      function renderMentee(mentee, self) {
+
+        const menteeName =
+          mentee.name || "Mentee";
+
+        const initials =
+          mentee.initials ||
+          getInitials(menteeName);
+
+        const roleLine =
+          mentee.roleLine ||
+          "Aspiring builder";
+
+        const location =
+          mentee.location ||
+          "Location not specified";
+
+
+        cardEl.innerHTML = `
+
+          <div class="profile-avatar">
+            ${escapeHtml(initials)}
+          </div>
+
+          <div class="profile-id">
+
+            <h1 class="display">
+              ${escapeHtml(menteeName)}
+            </h1>
+
+            <div class="profile-id-meta">
+
+              <span class="role-badge is-mentee">
+                Mentee
+              </span>
+
+              <span>
+                ${escapeHtml(roleLine)}
+              </span>
+
+              <span>·</span>
+
+              <span>
+                ${escapeHtml(location)}
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="profile-actions">
+
+            ${self
+
+            ? `
+                    <button
+                      class="button button-primary"
+                      type="button"
+                      id="edit-profile-btn">
+
+                      Edit profile
+
+                      <span aria-hidden="true">
+                        →
+                      </span>
+
+                    </button>
+
+                    <button
+                      class="button button-quiet"
+                      type="button"
+                      id="share-profile-btn">
+
+                      Share profile
+
+                    </button>
+                  `
+
+            : `
+                    <button
+                      class="button button-primary"
+                      data-open-mentor-chat
+                      data-chat-name="${escapeHtml(menteeName)}"
+                      data-chat-initials="${escapeHtml(initials)}">
+
+                      Message
+                      ${escapeHtml(menteeName.split(" ")[0])}
+
+                    </button>
+
+                    <button
+                      class="button button-quiet"
+                      data-open-video-call
+                      data-call-name="${escapeHtml(menteeName)}"
+                      data-call-initials="${escapeHtml(initials)}">
+
+                      Video call
+
+                    </button>
+                  `
+          }
+
+          </div>
+
+        `;
+
+
+        const timeline =
+          Array.isArray(mentee.timeline)
+            ? mentee.timeline
+            : [];
+
+
+        mainEl.innerHTML = `
+
+          <div class="profile-block">
+
+            <h3>
+              About
+            </h3>
+
+            <p>
+              ${escapeHtml(
+          mentee.about ||
+          "This mentee hasn't added an about section yet."
+        )}
+            </p>
+
+          </div>
+
+
+          <div class="profile-block">
+
+            <h3>
+              ${self
+            ? "Skills I'm building around"
+            : "Working on"
+          }
+            </h3>
+
+            <div class="chip-row">
+
+              ${chipRow(mentee.skills)}
+
+            </div>
+
+          </div>
+
+
+          <div class="profile-block">
+
+            <h3>
+              Recent steps
+            </h3>
+
+            ${timeline.length
+
+            ? `
+                    <div class="timeline-list">
+
+                      ${timeline.map(function (item) {
+
+              return `
+
+                            <div class="timeline-item">
+
+                              <time>
+                                ${escapeHtml(
+                item.date || ""
+              )}
+                              </time>
+
+                              <div>
+
+                                <h4>
+                                  ${escapeHtml(
+                item.title || ""
+              )}
+                                </h4>
+
+                                <p>
+                                  ${escapeHtml(
+                item.body || ""
+              )}
+                                </p>
+
+                              </div>
+
+                            </div>
+
+                          `;
+
+            }).join("")
+            }
+
+                    </div>
+                  `
+
+            : `
+                    <p style="color:var(--muted);">
+                      No recent steps added yet.
+                    </p>
+                  `
+          }
+
+          </div>
+
+        `;
+
+
+        const mentor =
+          mentee.mentor;
+
+
+        let mentorWidget = "";
+
+
+        if (self && mentor) {
+
+          mentorWidget = `
+
+            <div class="info-card">
+
+              <h4>
+                Your mentor
+              </h4>
+
+              <div class="mentor-mini">
+
+                <div class="profile-avatar">
+                  ${escapeHtml(
+            mentor.initials ||
+            getInitials(mentor.name)
+          )}
+                </div>
+
+                <div>
+
+                  <strong>
+                    ${escapeHtml(
+            mentor.name || "Mentor"
+          )}
+                  </strong>
+
+                  <span>
+                    ${escapeHtml(
+            mentor.roleLine || ""
+          )}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="my-mentor-actions">
+
+                <a
+                  class="button button-primary"
+                  href="mentee-dashboard.html?mentorId=${encodeURIComponent(
+                    mentor._id
+                  )}">
+
+                  Text
+                  ${escapeHtml(
+                    (mentor.name || "Mentor")
+                      .split(" ")[0]
+                  )}
+
+                </a>
+
+
+                <button
+                  class="button button-quiet"
+                  data-open-video-call
+                  data-call-name="${escapeHtml(
+            mentor.name || "Mentor"
+          )}"
+                  data-call-initials="${escapeHtml(
+            mentor.initials ||
+            getInitials(mentor.name)
+          )}">
+
+                  Video call
+
+                </button>
+
+              </div>
+
+
+              ${mentor._id
+
+              ? `
+                      <a
+                        class="button button-quiet"
+                        style="width:100%;margin-top:8px;justify-content:center;"
+                        href="profile.html?view=mentor&id=${encodeURIComponent(
+                mentor._id
+              )}">
+
+                        View mentor profile
+
+                      </a>
+                    `
+
+              : ""
+            }
+
+            </div>
+
+          `;
+
+        } else if (self) {
+
+          mentorWidget = `
+
+            <div class="info-card">
+
+              <h4>
+                Your mentor
+              </h4>
+
+              <p
+                style="margin:0;color:var(--muted);font-size:0.82rem;">
+
+                Not matched with a mentor yet.
+
+                <a
+                  href="mentors.html"
+                  style="color:var(--teal-dark);font-weight:600;">
+
+                  Browse mentors
+
+                </a>
+
+                and send a request.
+
+              </p>
+
+            </div>
+
+          `;
+
+        }
+
+
+        const stats =
+          mentee.progressStats &&
+            mentee.progressStats.length
+
+            ? mentee.progressStats
+
+            : [
+              {
+                value: "—",
+                label: "no data yet"
+              },
+              {
+                value: "—",
+                label: "no data yet"
+              },
+              {
+                value: "—",
+                label: "no data yet"
+              },
+              {
+                value: "—",
+                label: "no data yet"
+              }
+            ];
+
+
+        sidebarEl.innerHTML = `
+
+          <div class="stat-card">
+
+            <div class="stat-grid">
+
+              ${stats
+            .slice(0, 4)
+            .map(function (stat) {
+
+              return `
+
+                      <div>
+
+                        <strong>
+                          ${escapeHtml(
+                stat.value
+              )}
+                        </strong>
+
+                        <span>
+                          ${escapeHtml(
+                stat.label
+              )}
+                        </span>
+
+                      </div>
+
+                    `;
+
+            })
+            .join("")
+          }
+
+            </div>
+
+          </div>
+
+
+          ${mentorWidget}
+
+
+          <div class="info-card">
+
+            <h4>
+              Working on
+            </h4>
+
+            <ul class="info-list">
+
+              <li>
+
+                <span>
+                  Focus
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+            mentee.focus?.focus || "—"
+          )}
+                </strong>
+
+              </li>
+
+
+              <li>
+
+                <span>
+                  Stage
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+            mentee.focus?.stage || "—"
+          )}
+                </strong>
+
+              </li>
+
+
+              <li>
+
+                <span>
+                  Looking for
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+            mentee.focus?.lookingFor || "—"
+          )}
+                </strong>
+
+              </li>
+
+            </ul>
+
+          </div>
+
+        `;
+
+
+        rebindDynamicButtons();
+
+
+        const editButton =
+          document.querySelector(
+            "#edit-profile-btn"
+          );
+
+
+        if (editButton) {
+
+          editButton.addEventListener(
+            "click",
+            function () {
+
+              window.location.href = "edit-profile.html";
+
+            }
+          );
+
+        }
+
+
+        const shareButton =
+          document.querySelector(
+            "#share-profile-btn"
+          );
+
+
+        if (shareButton) {
+
+          shareButton.addEventListener(
+            "click",
+            async function () {
+
+              try {
+
+                await navigator.clipboard.writeText(
+                  window.location.href
+                );
+
+                shareButton.textContent =
+                  "Profile link copied";
+
+                setTimeout(function () {
+
+                  shareButton.textContent =
+                    "Share profile";
+
+                }, 1800);
+
+              } catch (error) {
+
+                alert(
+                  "Copy this profile URL:\n\n" +
+                  window.location.href
+                );
+
+              }
+
+            }
+          );
+
+        }
+
+      }
+
+
+      /* =======================================================
+         DYNAMIC BUTTONS
+         ======================================================= */
+
+      function rebindDynamicButtons() {
+
+        document
+          .querySelectorAll(
+            "[data-open-mentor-chat]"
+          )
+          .forEach(function (button) {
+
+            button.addEventListener(
+              "click",
+              openMentorChat
+            );
+
+          });
+
+
+        document
+          .querySelectorAll(
+            "[data-open-video-call]"
+          )
+          .forEach(function (button) {
+
+            button.addEventListener(
+              "click",
+              openVideoCall
+            );
+
+          });
+
+
+        document
+          .querySelectorAll(
+            ".profile-card, .profile-sidebar, .profile-block"
+          )
+          .forEach(function (element) {
+
+            element.classList.add(
+              "reveal",
+              "is-visible"
+            );
+
+          });
+
+      }
+
+
+      /* =======================================================
+         LOAD MENTOR PROFILE
+         ======================================================= */
+
+      function loadMentorProfile() {
+
+        if (!id) {
+
+          showError(
+            "No mentor specified."
+          );
+
+          return;
+
+        }
+
+
+        apiFetch(
+          "/api/mentors/" + encodeURIComponent(id)
+        )
+
+          .then(function (data) {
+
+            const mentor =
+              data.mentor;
+
+
+            if (!mentor) {
+
+              throw new Error(
+                "Mentor profile not found."
+              );
+
+            }
+
+
+            if (!isSignedIn()) {
+
+              renderMentor(
+                mentor,
+                "signed-out"
+              );
+
+              return;
+
+            }
+
+
+            const me =
+              getCachedUser();
+
+
+            if (
+              me &&
+              me.role === "mentee"
+            ) {
+
+              apiFetch("/api/matches")
+
+                .then(function (matchData) {
+
+                  const matches =
+                    Array.isArray(
+                      matchData.matches
+                    )
+                      ? matchData.matches
+                      : [];
+
+
+                  const existing =
+                    matches.find(
+                      function (match) {
+
+                        return (
+                          match.mentor &&
+                          String(
+                            match.mentor._id
+                          ) === String(id)
+                        );
+
+                      }
+                    );
+
+
+                  if (!existing) {
+
+                    renderMentor(
+                      mentor,
+                      "request"
+                    );
+
+                  } else if (
+                    existing.status === "pending"
+                  ) {
+
+                    renderMentor(
+                      mentor,
+                      "pending"
+                    );
+
+                  } else {
+
+                    renderMentor(
+                      mentor,
+                      "active"
+                    );
+
+                  }
+
+                })
+
+                .catch(function () {
+
+                  renderMentor(
+                    mentor,
+                    "request"
+                  );
+
+                });
+
+            } else {
+
+              renderMentor(
+                mentor,
+                "active"
+              );
+
+            }
+
+          })
+
+          .catch(function (error) {
+
+            showError(
+              "Couldn't load this profile — " +
+              error.message
+            );
+
+          });
+
+      }
+
+
+      /* =======================================================
+         LOAD OWN PROFILE
+         ======================================================= */
+
+      function loadOwnProfile() {
+
+        if (!isSignedIn()) {
+
+          showError(
+            "Sign in to see your profile."
+          );
+
+          return;
+
+        }
+
+
+        apiFetch("/api/auth/me")
+
+          .then(function (data) {
+
+            const user =
+              data?.user || data;
+
+
+            if (!user) {
+
+              throw new Error(
+                "Unable to load your profile."
+              );
+
+            }
+
+
+            /*
+             * A mentor's own profile should use the
+             * mentor presentation.
+             */
+            if (
+              user.role === "mentor"
+            ) {
+
+              renderMentor(
+                user,
+                "self"
+              );
+
+            } else {
+
+              renderMentee(
+                user,
+                true
+              );
+
+            }
+
+          })
+
+
+          .catch(function (error) {
+
+            showError(
+              "Couldn't load your profile — " +
+              error.message
+            );
+
+          });
+
+      }
+
+
+      /* =======================================================
+         LOAD PUBLIC MENTEE PROFILE
+         ======================================================= */
+
+      function loadMenteeProfile() {
+
+        if (!id) {
+
+          showError(
+            "No mentee specified."
+          );
+
+          return;
+
+        }
+
+
+        apiFetch(
+          "/api/mentees/" +
+          encodeURIComponent(id)
+        )
+
+          .then(function (data) {
+
+            if (!data.mentee) {
+
+              throw new Error(
+                "Mentee profile not found."
+              );
+
+            }
+
+
+            renderMentee(
+              data.mentee,
+              false
+            );
+
+          })
+
+          .catch(function (error) {
+
+            showError(
+              "Couldn't load this profile — " +
+              error.message
+            );
+
+          });
+
+      }
+
+
+      /* =======================================================
+         INITIALIZE
+         ======================================================= */
+
+      showLoading();
+
+
+      if (view === "mentor" && id) {
+
+        loadMentorProfile();
+
+      } else if (selfMode) {
+
+        loadOwnProfile();
+
+      } else {
+
+        loadMenteeProfile();
+
+      }
+
+    })();
+
+  </script>
+
+</body>
+
+</html>

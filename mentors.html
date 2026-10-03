@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Find experienced mentors on Skill to Startup and connect with someone who can help you move forward.">
+
+    <title>Find mentors — Skill to Startup</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="alternate icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="alternate icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+
+    <style>
+        /* =========================================================
+       MENTOR DIRECTORY
+       ========================================================= */
+
+        .mentors-page {
+            padding: 140px 0 90px;
+        }
+
+        .mentors-header {
+            max-width: 760px;
+            margin-bottom: 52px;
+        }
+
+        .mentors-header h1 {
+            margin: 8px 0 16px;
+        }
+
+        .mentors-header p {
+            max-width: 650px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .mentor-directory {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .mentor-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            padding: 26px;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: var(--paper);
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .mentor-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--ink);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, .06);
+        }
+
+        .mentor-card-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .mentor-avatar {
+            width: 64px;
+            height: 64px;
+            flex: 0 0 64px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--ink);
+            color: var(--paper);
+            font-family: "DM Mono", monospace;
+            font-size: 15px;
+        }
+
+        .mentor-card-identity {
+            min-width: 0;
+        }
+
+        .mentor-card-identity h2 {
+            margin: 2px 0 5px;
+            font-size: 21px;
+            line-height: 1.2;
+        }
+
+        .mentor-role {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .mentor-location {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .mentor-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 24px;
+        }
+
+        .mentor-skill {
+            padding: 6px 9px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .mentor-card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: auto;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+        }
+
+        .mentor-card-meta {
+            color: var(--muted);
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .mentor-loading,
+        .mentor-empty,
+        .mentor-error {
+            grid-column: 1 / -1;
+            padding: 50px 30px;
+            border: 1px dashed var(--line);
+            border-radius: 20px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .mentor-empty h2,
+        .mentor-error h2 {
+            margin: 0 0 10px;
+            color: var(--ink);
+        }
+
+        .mentor-empty p,
+        .mentor-error p {
+            max-width: 520px;
+            margin: 0 auto 20px;
+        }
+
+
+        /* =========================================================
+       ACTIVE PAGE NAVIGATION
+       ========================================================= */
+
+        .nav-links .nav-link {
+            position: relative;
+        }
+
+        .nav-links .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -8px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--coral);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform .25s ease;
+        }
+
+        .nav-links .nav-link:hover,
+        .nav-links .nav-link.is-active {
+            color: var(--ink);
+        }
+
+        .nav-links .nav-link:hover::after,
+        .nav-links .nav-link.is-active::after {
+            transform: scaleX(1);
+        }
+
+
+        /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .mentor-directory {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            .mentors-page {
+                padding-top: 120px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .mentors-page {
+                padding-top: 105px;
+                padding-bottom: 60px;
+            }
+
+            .mentor-directory {
+                grid-template-columns: 1fr;
+            }
+
+            .mentors-header h1 {
+                font-size: 42px;
+            }
+
+            .mentor-card {
+                padding: 22px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body class="grain">
+
+    <!-- =========================================================
+   PAGE LOADER
+   ========================================================= -->
+
+    <div class="page-loader" id="page-loader" aria-label="Loading Skill to Startup" role="status">
+
+        <div class="loader-inner">
+
+            <div class="loader-mark" aria-hidden="true">
+
+                <span>
+
+                    <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+
+                        <path fill="currentColor"
+                            d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+
+                    </svg>
+
+                </span>
+
+            </div>
+
+            <div class="loader-name">
+                skill to startup
+            </div>
+
+            <div class="loader-line">
+                <span></span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="site-shell">
+
+        <div class="scroll-progress" aria-hidden="true"></div>
+
+
+        <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+
+        <header class="site-header">
+
+            <div class="container nav">
+
+                <a class="brand" href="index.html" aria-label="Skill to Startup home">
+
+                    <span class="brand-mark">S</span>
+
+                    <span class="brand-text">
+                        Skill to Startup
+                    </span>
+
+                </a>
+
+
+                <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+
+                    <a class="nav-link" href="index.html">
+                        Home
+                    </a>
+
+                    <a class="nav-link" href="mentee-dashboard.html">
+                        Dashboard
+                    </a>
+
+                    <a class="nav-link" href="mentors.html">
+                        Find mentors
+                    </a>
+
+                </nav>
+
+
+                <div class="nav-actions">
+
+                    <a class="button button-quiet account-link" href="profile.html">
+
+                        <span class="avatar-dot" id="nav-avatar">
+
+                            --
+
+                        </span>
+
+                        My profile
+
+                    </a>
+
+
+                    <a class="button button-quiet" href="index.html" id="nav-signout" data-sign-out>
+
+                        Sign out
+
+                    </a>
+
+
+                    <button class="button button-quiet mobile-menu" id="mobile-menu" aria-expanded="false"
+                        type="button">
+
+                        Menu
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================================================
+       MAIN
+       ========================================================= -->
+
+        <main class="mentors-page">
+
+            <div class="container">
+
+                <!-- HEADER -->
+
+                <section class="mentors-header">
+
+                    <span class="eyebrow mono">
+                        FIND YOUR PERSON
+                    </span>
+
+                    <h1 class="display">
+                        Learn from someone who's already been there.
+                    </h1>
+
+                    <p>
+                        Browse mentors by their experience, skills, and
+                        background. Find someone who understands the problem
+                        you're trying to solve and start a conversation.
+                    </p>
+
+                </section>
+
+
+                <!-- =================================================
+               MENTOR DIRECTORY
+               ================================================= -->
+
+                <section class="mentor-directory" id="mentor-directory" aria-live="polite">
+
+                    <div class="mentor-loading">
+                        Loading mentors...
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+
+        <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+
+        <footer class="container footer">
+
+            <div class="footer-top">
+
+                <div class="footer-main">
+
+                    <a class="brand" href="index.html">
+
+                        <span class="brand-mark">
+
+                            <span>
+
+                                <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+
+                                    <path fill="currentColor"
+                                        d="M12 1C12.9 7.8 16.2 11.1 23 12C16.2 12.9 12.9 16.2 12 23C11.1 16.2 7.8 12.9 1 12C7.8 11.1 11.1 7.8 12 1Z" />
+
+                                </svg>
+
+                            </span>
+
+                        </span>
+
+                        <span>
+                            skill to startup
+                        </span>
+
+                    </a>
+
+                    <p>
+                        For people building something useful, their way.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-menu" aria-label="Footer navigation">
+
+                    <span class="footer-menu-title mono">
+                        Explore
+                    </span>
+
+                    <a class="footer-menu-link" href="index.html">
+
+                        <span>01</span>
+                        Home
+
+                    </a>
+                   
+                    <a class="footer-menu-link" href="mentee-dashboard.html">
+
+                        <span>02</span>
+                        Dashboard
+
+                    </a>
+
+                    <a class="footer-menu-link" href="mentors.html">
+
+                        <span>03</span>
+                        Find a mentor
+
+                    </a>
+
+                    <a class="footer-menu-link accent" href="profile.html">
+
+                        <span>04</span>
+                        My Profile
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span class="footer-copyright">
+                    © 2026 Skill to Startup. All rights reserved.
+                </span>
+
+                <div class="footer-legal">
+
+                    <a href="privacy-policy.html">
+                        Privacy Policy
+                    </a>
+
+                    <a href="terms-of-service.html">
+                        Terms of Service
+                    </a>
+
+                </div>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    <button class="back-to-top" type="button" id="back-to-top" aria-label="Back to top">
+
+        ↑
+
+    </button>
+
+
+    <!-- =========================================================
+   SHARED SCRIPT
+   ========================================================= -->
+
+    <script src="js/scripts.js"></script>
+
+
+    <!-- =========================================================
+   MENTORS PAGE ACTIVE NAV
+   ========================================================= -->
+
+    <script>
+        /*
+         * Explicitly activate "Find mentors" on mentors.html.
+         * This is intentionally page-specific so the underline
+         * cannot remain on Dashboard after navigation.
+         */
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const navLinks = document.querySelectorAll(
+                ".nav-links .nav-link"
+            );
+
+            navLinks.forEach(function (link) {
+                link.classList.remove("is-active");
+            });
+
+            const mentorsLink = document.querySelector(
+                '.nav-links .nav-link[href="mentors.html"]'
+            );
+
+            if (mentorsLink) {
+                mentorsLink.classList.add("is-active");
+            }
+
+        });
+    </script>
+
+
+    <!-- =========================================================
+   MENTOR DIRECTORY LOGIC
+   ========================================================= -->
+
+    <script>
+
+        (function () {
+
+            const directory =
+                document.querySelector("#mentor-directory");
+
+
+            function escapeHtml(value) {
+
+                return String(value ?? "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+
+            }
+
+
+            function getInitials(name) {
+
+                return String(name || "")
+                    .split(" ")
+                    .filter(Boolean)
+                    .slice(0, 2)
+                    .map(function (part) {
+
+                        return part
+                            .charAt(0)
+                            .toUpperCase();
+
+                    })
+                    .join("") || "—";
+
+            }
+
+
+            function normaliseSkills(skills) {
+
+                if (Array.isArray(skills)) {
+                    return skills;
+                }
+
+                if (typeof skills === "string") {
+
+                    return skills
+                        .split(",")
+                        .map(function (skill) {
+                            return skill.trim();
+                        })
+                        .filter(Boolean);
+
+                }
+
+                return [];
+
+            }
+
+
+            function renderMentors(mentors) {
+
+                if (!mentors.length) {
+
+                    directory.innerHTML = `
+
+                    <div class="mentor-empty">
+
+                        <h2>
+                            No mentors available yet.
+                        </h2>
+
+                        <p>
+                            We're still building the mentor community.
+                            Check back soon.
+                        </p>
+
+                    </div>
+
+                `;
+
+                    return;
+
+                }
+
+
+                directory.innerHTML =
+                    mentors.map(function (mentor) {
+
+                        const id =
+                            mentor._id ||
+                            mentor.id;
+
+
+                        const name =
+                            mentor.name ||
+                            "Mentor";
+
+
+                        const initials =
+                            mentor.initials ||
+                            getInitials(name);
+
+
+                        const roleLine =
+                            mentor.roleLine ||
+                            "Skill to Startup mentor";
+
+
+                        const location =
+                            mentor.location ||
+                            "";
+
+
+                        const skills =
+                            normaliseSkills(
+                                mentor.skills
+                            );
+
+
+                        const visibleSkills =
+                            skills.slice(0, 4);
+
+
+                        const stats =
+                            mentor.stats || {};
+
+
+                        const experience =
+                            stats.experience ||
+                            stats.yearsExperience ||
+                            "";
+
+
+                        return `
+
+                        <article class="mentor-card">
+
+                            <div class="mentor-card-top">
+
+                                <div class="mentor-avatar">
+                                    ${escapeHtml(initials)}
+                                </div>
+
+
+                                <div class="mentor-card-identity">
+
+                                    <h2>
+                                        ${escapeHtml(name)}
+                                    </h2>
+
+                                    <p class="mentor-role">
+                                        ${escapeHtml(roleLine)}
+                                    </p>
+
+                                    ${location
+                                ? `
+                                                <div class="mentor-location">
+                                                    ${escapeHtml(location)}
+                                                </div>
+                                              `
+                                : ""
+                            }
+
+                                </div>
+
+                            </div>
+
+
+                            ${visibleSkills.length
+                                ? `
+                                        <div class="mentor-skills">
+
+                                            ${visibleSkills.map(function (skill) {
+
+                                    return `
+                                                    <span class="mentor-skill">
+                                                        ${escapeHtml(skill)}
+                                                    </span>
+                                                `;
+
+                                }).join("")}
+
+                                        </div>
+                                      `
+                                : ""
+                            }
+
+
+                            <div class="mentor-card-bottom">
+
+                                <div class="mentor-card-meta">
+
+                                    ${experience
+                                ? escapeHtml(experience)
+                                : "MENTOR"
+                            }
+
+                                </div>
+
+
+                                <a
+                                    class="button button-primary"
+                                    href="profile.html?view=mentor&id=${encodeURIComponent(id)}">
+
+                                    View profile
+
+                                    <span aria-hidden="true">
+                                        →
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+                        </article>
+
+                    `;
+
+                    }).join("");
+
+            }
+
+
+            async function loadMentors() {
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "http://localhost:5000/api/mentors"
+                        );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Failed to load mentors."
+                        );
+
+                    }
+
+
+                    const data =
+                        await response.json();
+
+
+                    const mentors =
+                        Array.isArray(data?.mentors)
+                            ? data.mentors
+                            : [];
+
+
+                    renderMentors(mentors);
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Failed to load mentors:",
+                        error
+                    );
+
+
+                    directory.innerHTML = `
+
+                    <div class="mentor-error">
+
+                        <h2>
+                            Couldn't load mentors.
+                        </h2>
+
+                        <p>
+                            Please make sure the Skill to Startup
+                            server is running and try again.
+                        </p>
+
+                        <button
+                            class="button button-primary"
+                            type="button"
+                            id="retry-mentors">
+
+                            Try again
+
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                    const retry =
+                        document.querySelector(
+                            "#retry-mentors"
+                        );
+
+
+                    if (retry) {
+
+                        retry.addEventListener(
+                            "click",
+                            loadMentors
+                        );
+
+                    }
+
+                }
+
+            }
+
+
+            loadMentors();
+
+        })();
+
+    </script>
+
+</body>
+
+</html>
