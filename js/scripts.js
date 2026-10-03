@@ -2,7 +2,7 @@
 API CONFIG
 ========================================================= */
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = window.location.origin;
 
 /* =========================================================
 AUTH STATE — backed by a real JWT from the backend
